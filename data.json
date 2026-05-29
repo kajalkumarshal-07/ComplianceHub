@@ -1,0 +1,2915 @@
+﻿{
+    "policies":  [
+                     {
+                         "platformType":  "Windows 10 and Later",
+                         "displayName":  "Windows Device Compliance",
+                         "id":  "pol-1"
+                     },
+                     {
+                         "platformType":  "iOS",
+                         "displayName":  "iOS Compliance Policy",
+                         "id":  "pol-2"
+                     },
+                     {
+                         "platformType":  "Android",
+                         "displayName":  "Android Compliance Policy",
+                         "id":  "pol-3"
+                     },
+                     {
+                         "platformType":  "macOS",
+                         "displayName":  "macOS Compliance",
+                         "id":  "pol-4"
+                     },
+                     {
+                         "platformType":  "Windows 10 and Later",
+                         "displayName":  "Windows 11 Baseline",
+                         "id":  "pol-5"
+                     },
+                     {
+                         "platformType":  "Windows 10 and Later",
+                         "displayName":  "M365 Apps Compliance",
+                         "id":  "pol-6"
+                     }
+                 ],
+    "devices":  [
+                    {
+                        "id":  "device-1",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-03T11:13:29.7865360+05:30",
+                        "complianceState": "graceperiod",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-T8XUAWK",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user1@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-2",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-20T11:13:29.8297616+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-R87TFDB",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user2@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-3",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-03-31T11:13:29.8663142+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "Galaxy S24",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-E03GZA8",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user3@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-4",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-09T11:13:29.8973167+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-N3MTQAR",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user4@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-5",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-13T11:13:29.9245440+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-E0GX4S8",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user5@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-6",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-08T11:13:29.9460601+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "Galaxy S24",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-PKTZ8JD",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user6@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-7",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-09T11:13:29.9850636+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-YPLMA1B",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user7@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-8",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-26T11:13:30.0313344+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "iPhone 15",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-5TR7G6Z",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user8@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-9",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-05-13T11:13:30.0518514+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-FUZA1Y8",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user9@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-10",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-07T11:13:30.0728514+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-MG4K7PW",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user10@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-11",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-04-17T11:13:30.0958512+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-U38LNKD",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user11@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-12",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-15T11:13:30.1140668+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-N0Y34LX",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user12@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-13",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-18T11:13:30.1320758+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-RQDJHSN",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user13@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-14",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-04-17T11:13:30.1495956+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-NYH92EW",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user14@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-15",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-09T11:13:30.1675971+05:30",
+                        "complianceState": "graceperiod",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-R32BNQC",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user15@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-16",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-14T11:13:30.1985966+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "Latitude 5420",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-92Y71AR",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user16@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-17",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-25T11:13:30.2165945+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "EliteBook 840",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-HELO4BV",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user17@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-18",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-12T11:13:30.2356017+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "EliteBook 840",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-YD0AC5T",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user18@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-19",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-22T11:13:30.2548325+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-BHJ0P26",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user19@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-20",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-03T11:13:30.2758327+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "Latitude 5420",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-M5TJGH6",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user20@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-21",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-05T11:13:30.2978340+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-Z1M2RO9",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user21@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-22",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-08T11:13:30.3188328+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "EliteBook 840",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-DKTHS7I",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user22@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-23",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-16T11:13:30.3388421+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-KWG7HEO",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user23@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-24",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-04-08T11:13:30.3583622+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "Galaxy S24",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-5VPSLQ4",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user24@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-25",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-07T11:13:30.3763656+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "iPhone 15",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-A3OKQYH",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user25@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-26",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-01T11:13:30.4266454+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-7G4WAKC",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user26@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-27",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-30T11:13:30.4451661+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-9KWX3CZ",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user27@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-28",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-03T11:13:30.4641662+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "Galaxy S24",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-JQU7ODW",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user28@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-29",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-05-23T11:13:30.4841627+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-ZST5E73",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user29@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-30",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-05T11:13:30.5064294+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-8VE5DP1",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user30@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-31",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-29T11:13:30.5284432+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "EliteBook 840",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-F4ZYX8G",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user31@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-32",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-23T11:13:30.5487938+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-8FNJQHC",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user32@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-33",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-03-31T11:13:30.5747915+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-ADF0X65",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user33@contoso.com",
+                        "jailBroken":  true
+                    },
+                    {
+                        "id":  "device-34",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-07T11:13:30.5957932+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-BWJRT61",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user34@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-35",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-05-28T11:13:30.6190061+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-XKQO1P9",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user35@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-36",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-04-30T11:13:30.6425435+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "Galaxy S24",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-ZA9FP8D",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user36@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-37",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-29T11:13:30.6645389+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-6DG78S9",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user37@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-38",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-06T11:13:30.6865373+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "Latitude 5420",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-GK3JUNV",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user38@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-39",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-05-17T11:13:30.7085388+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "Galaxy S24",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-XKO8JSH",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user39@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-40",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-19T11:13:30.7295495+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "Galaxy S24",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-5HLMK2X",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user40@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-41",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-08T11:13:30.7490665+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-64P7UQ1",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user41@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-42",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-15T11:13:30.7690659+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "Latitude 5420",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-MGV7FA1",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user42@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-43",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-03T11:13:30.7920684+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-UM2NXQZ",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user43@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-44",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-05T11:13:30.8122842+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-I8Q0ZV3",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user44@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-45",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-05-13T11:13:30.8322877+05:30",
+                        "complianceState": "graceperiod",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "Galaxy S24",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-45FG0XA",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user45@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-46",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-05-20T11:13:30.8528114+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "Latitude 5420",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-HE2U890",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user46@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-47",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-09T11:13:30.8748070+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-MI91LW6",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user47@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-48",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-02T11:13:30.8938160+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "iPhone 15",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-28TE67O",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user48@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-49",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-30T11:13:30.9120406+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Galaxy S24",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-KSVC8A2",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user49@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-50",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-02T11:13:30.9350480+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-DXLVGT6",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user50@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-51",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-19T11:13:30.9575641+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-DJ2UCXT",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user51@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-52",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-13T11:13:30.9785640+05:30",
+                        "complianceState": "graceperiod",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-0XCY9HR",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user52@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-53",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-06T11:13:30.9995637+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-JB3XWIR",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user53@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-54",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-13T11:13:31.0318931+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-5CW0Q91",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user54@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-55",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-04-07T11:13:31.0524351+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-IOW4Q9R",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user55@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-56",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-25T11:13:31.0744416+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-5KP6BD9",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user56@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-57",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-07T11:13:31.0954251+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Latitude 5420",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-4NBCY8T",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user57@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-58",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-20T11:13:31.1157264+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-MGIRU7Z",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user58@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-59",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-10T11:13:31.1387472+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-8DIZ9T1",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user59@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-60",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-01T11:13:31.1600904+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-4YDPV1O",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user60@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-61",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-05-10T11:13:31.1810937+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "EliteBook 840",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-PX5KB1W",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user61@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-62",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-07T11:13:31.2250972+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-WPRB748",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user62@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-63",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-13T11:13:31.2436253+05:30",
+                        "complianceState": "graceperiod",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-2WS8QCJ",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user63@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-64",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-07T11:13:31.2646206+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-2XP7ZRU",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user64@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-65",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-04-20T11:13:31.2829450+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-0Z9S532",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user65@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-66",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-02T11:13:31.3047252+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Galaxy S24",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-8JPUY16",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user66@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-67",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-15T11:13:31.3246761+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "EliteBook 840",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-1OFYH2T",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user67@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-68",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-28T11:13:31.3408446+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-XL9Z12C",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user68@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-69",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-22T11:13:31.3648515+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-SMB48W1",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user69@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-70",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-06T11:13:31.3918238+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "iPhone 15",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-KGUN81M",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user70@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-71",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-05-01T11:13:31.4118118+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "EliteBook 840",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-1NF5X48",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user71@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-72",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-14T11:13:31.4340593+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-9AIFOZQ",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user72@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-73",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-04-16T11:13:31.4563415+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-OIK2DXR",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user73@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-74",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-08T11:13:31.4773348+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "Galaxy S24",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-S9EB3L6",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user74@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-75",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-29T11:13:31.4973336+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-APQ1VST",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user75@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-76",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-04-25T11:13:31.5163364+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-SCOJQ8L",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user76@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-77",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-30T11:13:31.5364055+05:30",
+                        "complianceState": "graceperiod",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "iPhone 15",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-KM9T1IB",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user77@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-78",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-04T11:13:31.5571341+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-Q1GZDRH",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user78@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-79",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-11T11:13:31.5751405+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "iPhone 15",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-4IV5NLG",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user79@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-80",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-28T11:13:31.5971388+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-H8YCNPZ",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user80@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-81",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-20T11:13:31.6151339+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "EliteBook 840",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-KYJNIM0",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user81@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-82",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-01T11:13:31.6321509+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-0JCPOY9",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user82@contoso.com",
+                        "jailBroken":  true
+                    },
+                    {
+                        "id":  "device-83",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-08T11:13:31.6525570+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "iPhone 15",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-BUE6NRP",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user83@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-84",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-09T11:13:31.6725561+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "iPhone 15",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-10LTE8F",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user84@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-85",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-08T11:13:31.6915559+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-GJX8H14",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user85@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-86",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-04T11:13:31.7135594+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "Galaxy S24",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-ZT6I1HV",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user86@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-87",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-18T11:13:31.7345721+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "EliteBook 840",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-EB4N83X",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user87@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-88",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-28T11:13:31.7543906+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Galaxy S24",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-80UFZ9X",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user88@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-89",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-18T11:13:31.7753885+05:30",
+                        "complianceState": "graceperiod",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "EliteBook 840",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-P9G4KQO",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user89@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-90",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-21T11:13:31.7963881+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-N925AEB",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user90@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-91",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-05-03T11:13:31.8153867+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-K479NPD",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user91@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-92",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-06T11:13:31.8353989+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-KTAEZWB",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user92@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-93",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-05-05T11:13:31.8589594+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "EliteBook 840",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-FWM69EP",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user93@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-94",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-23T11:13:31.8779366+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "Galaxy S24",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-UD2FQ1E",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user94@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-95",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-12T11:13:31.8969342+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "iPhone 15",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-MTEX5SK",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user95@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-96",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-04T11:13:31.9159345+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-V5IKON2",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user96@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-97",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-16T11:13:31.9379708+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "Galaxy S24",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-IXC2WKJ",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user97@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-98",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-05T11:13:31.9594736+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Galaxy S24",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-O9SLUIR",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user98@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-99",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-04T11:13:31.9794674+05:30",
+                        "complianceState": "graceperiod",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "EliteBook 840",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-7J8GA1S",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user99@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-100",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-06T11:13:31.9986073+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-9H3SQP0",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user100@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-101",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-15T11:13:32.0176047+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Lenovo",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "EliteBook 840",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-ON3KPXR",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user101@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-102",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-27T11:13:32.0396108+05:30",
+                        "complianceState": "graceperiod",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-QCZJ1OB",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user102@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-103",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-04-07T11:13:32.0579228+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "EliteBook 840",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-NGD4RYT",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user103@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-104",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-21T11:13:32.0819237+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-UXJ6SWQ",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user104@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-105",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-09T11:13:32.1049606+05:30",
+                        "complianceState": "graceperiod",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "Latitude 5420",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-VI9A0WY",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user105@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-106",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-28T11:13:32.1269363+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "Dell Inc.",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-O9KUBN6",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user106@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-107",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-10T11:13:32.1465233+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-W3ARZE5",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user107@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-108",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-11T11:13:32.1718192+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-LKP9FGZ",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user108@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-109",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-01T11:13:32.1977958+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Surface Pro 9",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-743LDNK",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user109@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-110",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-30T11:13:32.2197989+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "androidEnterprise",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-5X1FBPL",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user110@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-111",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-20T11:13:32.2418059+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "EliteBook 840",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-82LAQH0",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user111@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-112",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-08T11:13:32.2655576+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "EliteBook 840",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "notEncrypted",
+                        "deviceName":  "DESKTOP-45ISC1B",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user112@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-113",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-03T11:13:32.2885606+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-8WL7CYM",
+                        "osVersion":  "13.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user113@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-114",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-10T11:13:32.3095544+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "iPhone 15",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-54RV1JA",
+                        "osVersion":  "10.0.19045",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user114@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-115",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-05-09T11:13:32.3325703+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "low",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "Latitude 5420",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "macOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-4ZMVEG6",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user115@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-116",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-08T11:13:32.3510810+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-CDPJ21Q",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user116@contoso.com",
+                        "jailBroken":  true
+                    },
+                    {
+                        "id":  "device-117",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-08T11:13:32.3712845+05:30",
+                        "complianceState":  "noncompliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Samsung",
+                        "deviceEnrollmentType":  "windowsMDM",
+                        "model":  "EliteBook 840",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-R3XOMLA",
+                        "osVersion":  "15.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user117@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-118",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-04-18T11:13:32.3922772+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "medium",
+                        "manufacturer":  "HP Inc.",
+                        "deviceEnrollmentType":  "appleDeviceEnrollment",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "iOS",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-VP9346X",
+                        "osVersion":  "17.0",
+                        "deviceComplianceError":  "Encryption required",
+                        "userPrincipalName":  "user118@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-119",
+                        "isEncrypted":  false,
+                        "lastSyncDateTime":  "2026-05-16T11:13:32.4112765+05:30",
+                        "complianceState":  "compliant",
+                        "riskLevel":  "high",
+                        "manufacturer":  "Microsoft Corporation",
+                        "deviceEnrollmentType":  "userEnrollment",
+                        "model":  "Latitude 5420",
+                        "ownership":  "personal",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Android",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-DNPA2VT",
+                        "osVersion":  "10.0.22631",
+                        "deviceComplianceError":  "OS version not supported",
+                        "userPrincipalName":  "user119@contoso.com",
+                        "jailBroken":  false
+                    },
+                    {
+                        "id":  "device-120",
+                        "isEncrypted":  true,
+                        "lastSyncDateTime":  "2026-05-18T11:13:32.4362916+05:30",
+                        "complianceState":  "unknown",
+                        "riskLevel":  "none",
+                        "manufacturer":  "Apple Inc.",
+                        "deviceEnrollmentType":  "windowsAzureADJoin",
+                        "model":  "ThinkPad X1",
+                        "ownership":  "corporate",
+                        "requireUserEnrollmentAuthorization":  false,
+                        "operatingSystem":  "Windows",
+                        "windowsProtectionState":  {
+                                                       "pendingQuickScan":  false
+                                                   },
+                        "bitLockerStatus":  "encrypted",
+                        "deviceName":  "DESKTOP-8RBVW51",
+                        "osVersion":  "14.0",
+                        "deviceComplianceError":  "Password policy not met",
+                        "userPrincipalName":  "user120@contoso.com",
+                        "jailBroken":  false
+                    }
+                ],
+    "_metadata":  {
+                      "exportedBy":  "MockData",
+                      "exportedAt":  "2026-05-29 11:13:32",
+                      "deviceCount":  120
+                  },
+    "updateRings":  [
+                        {
+                            "displayName":  "Windows Update Ring - Pilot",
+                            "deploymentState":  "active"
+                        },
+                        {
+                            "displayName":  "Windows Update Ring - Fast",
+                            "deploymentState":  "active"
+                        },
+                        {
+                            "displayName":  "Windows Update Ring - Broad",
+                            "deploymentState":  "active"
+                        },
+                        {
+                            "displayName":  "Windows Update Ring - Critical",
+                            "deploymentState":  "active"
+                        },
+                        {
+                            "displayName":  "Windows Update Ring - Test",
+                            "deploymentState":  "paused"
+                        }
+                    ],
+    "apps":  [
+                 {
+                     "publisher":  "Microsoft Corporation",
+                     "appType":  "win32",
+                     "displayName":  "Microsoft 365 Apps for Enterprise",
+                     "installedCount":  95,
+                     "failedCount":  2
+                 },
+                 {
+                     "publisher":  "Microsoft Corporation",
+                     "appType":  "win32",
+                     "displayName":  "Microsoft Edge",
+                     "installedCount":  112,
+                     "failedCount":  1
+                 },
+                 {
+                     "publisher":  "Microsoft Corporation",
+                     "appType":  "win32",
+                     "displayName":  "Microsoft Teams",
+                     "installedCount":  89,
+                     "failedCount":  5
+                 },
+                 {
+                     "publisher":  "Microsoft Corporation",
+                     "appType":  "microsoftstore",
+                     "displayName":  "Company Portal",
+                     "installedCount":  118,
+                     "failedCount":  0
+                 },
+                 {
+                     "publisher":  "Microsoft Corporation",
+                     "appType":  "ios",
+                     "displayName":  "Outlook Mobile",
+                     "installedCount":  45,
+                     "failedCount":  1
+                 },
+                 {
+                     "publisher":  "Microsoft Corporation",
+                     "appType":  "android",
+                     "displayName":  "Teams Mobile",
+                     "installedCount":  38,
+                     "failedCount":  3
+                 },
+                 {
+                     "publisher":  "Adobe",
+                     "appType":  "win32",
+                     "displayName":  "Adobe Acrobat Reader",
+                     "installedCount":  67,
+                     "failedCount":  4
+                 },
+                 {
+                     "publisher":  "Zoom Video Communications",
+                     "appType":  "win32",
+                     "displayName":  "Zoom Meetings",
+                     "installedCount":  52,
+                     "failedCount":  6
+                 },
+                 {
+                     "publisher":  "Notepad++ Team",
+                     "appType":  "msi",
+                     "displayName":  "Notepad++",
+                     "installedCount":  34,
+                     "failedCount":  0
+                 },
+                 {
+                     "publisher":  "ServiceNow",
+                     "appType":  "web",
+                     "displayName":  "ServiceNow Agent",
+                     "installedCount":  0,
+                     "failedCount":  0
+                 },
+                 {
+                     "publisher":  "Microsoft Corporation",
+                     "appType":  "win32",
+                     "displayName":  "Power BI Desktop",
+                     "installedCount":  28,
+                     "failedCount":  2
+                 },
+                 {
+                     "publisher":  "Microsoft Corporation",
+                     "appType":  "win32",
+                     "displayName":  "Visual Studio Code",
+                     "installedCount":  41,
+                     "failedCount":  1
+                 },
+                 {
+                     "publisher":  "Slack Technologies",
+                     "appType":  "win32",
+                     "displayName":  "Slack",
+                     "installedCount":  22,
+                     "failedCount":  3
+                 },
+                 {
+                     "publisher":  "Microsoft Corporation",
+                     "appType":  "win32",
+                     "displayName":  "OneDrive Sync",
+                     "installedCount":  103,
+                     "failedCount":  0
+                 },
+                 {
+                     "publisher":  "Cisco",
+                     "appType":  "win32",
+                     "displayName":  "Cisco Webex",
+                     "installedCount":  15,
+                     "failedCount":  2
+                 }
+             ],
+    "autopilot":  [
+                      {
+                          "enrolledDateTime":  "2026-02-28T11:13:32.4905774+05:30",
+                          "deviceName":  "DESKTOP-A1B2C3D",
+                          "serialNumber":  "ABC-123"
+                      },
+                      {
+                          "enrolledDateTime":  "2026-03-30T11:13:32.4925788+05:30",
+                          "deviceName":  "DESKTOP-E4F5G6H",
+                          "serialNumber":  "DEF-456"
+                      },
+                      {
+                          "enrolledDateTime":  "2026-04-29T11:13:32.4925788+05:30",
+                          "deviceName":  "DESKTOP-I7J8K9L",
+                          "serialNumber":  "GHI-789"
+                      },
+                      {
+                          "enrolledDateTime":  null,
+                          "deviceName":  "",
+                          "serialNumber":  "JKL-012"
+                      },
+                      {
+                          "enrolledDateTime":  null,
+                          "deviceName":  "",
+                          "serialNumber":  "MNO-345"
+                      }
+                  ],
+    "timestamp":  "2026-05-29T11:13:32.4925788+05:30",
+    "configs":  [
+                    {
+                        "platformType":  "windows10AndLater",
+                        "roleScopeTagIds":  [
+                                                "1",
+                                                "2"
+                                            ],
+                        "displayName":  "Windows Security Baseline",
+                        "technologies":  "mdm"
+                    },
+                    {
+                        "platformType":  "windows10AndLater",
+                        "displayName":  "Edge Settings Policy",
+                        "technologies":  "mdm"
+                    },
+                    {
+                        "platformType":  "ios",
+                        "roleScopeTagIds":  [
+                                                "1"
+                                            ],
+                        "displayName":  "iOS Device Restrictions",
+                        "technologies":  "mdm"
+                    },
+                    {
+                        "platformType":  "android",
+                        "displayName":  "Android Enterprise Defaults",
+                        "technologies":  "mdm"
+                    },
+                    {
+                        "platformType":  "windows10AndLater",
+                        "roleScopeTagIds":  [
+                                                "1",
+                                                "2",
+                                                "3"
+                                            ],
+                        "displayName":  "BitLocker Encryption Policy",
+                        "technologies":  "mdm"
+                    },
+                    {
+                        "platformType":  "windows10AndLater",
+                        "displayName":  "WiFi Profile - Corp",
+                        "technologies":  "mdm"
+                    },
+                    {
+                        "platformType":  "macOS",
+                        "displayName":  "macOS Disk Encryption",
+                        "technologies":  "mdm"
+                    },
+                    {
+                        "platformType":  "windows10AndLater",
+                        "displayName":  "VPN Configuration",
+                        "technologies":  "mdm"
+                    },
+                    {
+                        "platformType":  "ios",
+                        "roleScopeTagIds":  [
+                                                "1"
+                                            ],
+                        "displayName":  "Email Profile - Outlook",
+                        "technologies":  "mdm"
+                    },
+                    {
+                        "platformType":  "windows10AndLater",
+                        "displayName":  "Windows Update Ring - Fast",
+                        "technologies":  "mdm"
+                    }
+                ],
+    "healthScripts":  [
+                          {
+                              "displayName":  "BitLocker Check",
+                              "detectionType":  "builtin"
+                          },
+                          {
+                              "displayName":  "Defender AV Status",
+                              "detectionType":  "builtin"
+                          }
+                      ]
+}

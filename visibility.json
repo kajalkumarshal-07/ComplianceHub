@@ -1,0 +1,159 @@
+{
+  "timestamp": "2026-05-29T14:30:00.000Z",
+  "exportedAt": "2026-05-29 14:30:00",
+  "overallHealthScore": 62,
+  "summary": { "totalFindings": 18, "critical": 4, "warning": 11, "info": 3 },
+  "policyConflicts": {
+    "totalPoliciesAnalyzed": 47,
+    "conflicts": [
+      { "setting": "deviceLock_maxInactivityTimeDeviceLock", "conflictCount": 3, "values": [{ "policy": "Windows Security Baseline (DeviceConfig)", "source": "DeviceConfig", "value": "15" }, { "policy": "Corporate Lockdown (DeviceConfig)", "source": "DeviceConfig", "value": "5" }, { "policy": "M365 Apps Compliance (Compliance)", "source": "Compliance", "value": "10" }], "affectedPolicies": "Windows Security Baseline (DeviceConfig); Corporate Lockdown (DeviceConfig); M365 Apps Compliance (Compliance)", "severity": "high" },
+      { "setting": "bitlocker_encryptionMethod", "conflictCount": 2, "values": [{ "policy": "Windows Security Baseline (DeviceConfig)", "source": "DeviceConfig", "value": "XTS-AES-128" }, { "policy": "Full Disk Encryption (SettingsCatalog)", "source": "SettingsCatalog", "value": "XTS-AES-256" }], "affectedPolicies": "Windows Security Baseline (DeviceConfig); Full Disk Encryption (SettingsCatalog)", "severity": "high" },
+      { "setting": "firewall_profileDomain_enable", "conflictCount": 2, "values": [{ "policy": "Windows Security Baseline (DeviceConfig)", "source": "DeviceConfig", "value": "true" }, { "policy": "Allow Legacy Apps (SettingsCatalog)", "source": "SettingsCatalog", "value": "false" }], "affectedPolicies": "Windows Security Baseline (DeviceConfig); Allow Legacy Apps (SettingsCatalog)", "severity": "medium" },
+      { "setting": "defender_cloudBlockLevel", "conflictCount": 2, "values": [{ "policy": "Windows Security Baseline (DeviceConfig)", "source": "DeviceConfig", "value": "high" }, { "policy": "Performance Mode (SettingsCatalog)", "source": "SettingsCatalog", "value": "normal" }], "affectedPolicies": "Windows Security Baseline (DeviceConfig); Performance Mode (SettingsCatalog)", "severity": "medium" }
+    ],
+    "duplicates": [
+      { "setting": "password_minimumLength", "duplicateCount": 3, "value": "8", "affectedPolicies": "Windows Device Compliance (Compliance); iOS Compliance Policy (Compliance); Android Compliance Policy (Compliance)" }
+    ]
+  },
+  "securityAudit": {
+    "score": 45,
+    "mmaStatus": "NOT ENABLED — Tier 0 risk. Single admin can bulk-wipe all devices.",
+    "criticalActions": [
+      { "actor": "admin@contoso.com", "action": "wipe", "time": "2026-05-28T02:15:00.000Z" },
+      { "actor": "admin@contoso.com", "action": "retire", "time": "2026-05-28T02:18:00.000Z" },
+      { "actor": "admin@contoso.com", "action": "delete", "time": "2026-05-28T02:22:00.000Z" },
+      { "actor": "svc-intune@contoso.com", "action": "wipe", "time": "2026-05-25T23:45:00.000Z" }
+    ],
+    "anomalies": [
+      { "type": "offHoursDestructive", "severity": "critical", "timestamp": "2026-05-28T02:15:00.000Z", "actor": "admin@contoso.com", "activityType": "wipe", "description": "Destructive action performed outside business hours" },
+      { "type": "offHoursDestructive", "severity": "critical", "timestamp": "2026-05-28T02:18:00.000Z", "actor": "admin@contoso.com", "activityType": "retire", "description": "Destructive action performed outside business hours" },
+      { "type": "offHoursAdminChange", "severity": "high", "timestamp": "2026-05-27T23:30:00.000Z", "actor": "admin@contoso.com", "activityType": "roleUpdate", "description": "Admin role/permission change outside business hours" },
+      { "type": "offHoursDestructive", "severity": "critical", "timestamp": "2026-05-25T23:45:00.000Z", "actor": "svc-intune@contoso.com", "activityType": "wipe", "description": "Destructive action performed outside business hours" },
+      { "type": "bulkOperation", "severity": "critical", "count": 6, "timeframe": "2026-05-28-02", "description": "6 destructive operations in one hour window" },
+      { "type": "bulkOperation", "severity": "critical", "count": 5, "timeframe": "2026-05-25-23", "description": "5 destructive operations in one hour window" },
+      { "type": "maaNotEnabled", "severity": "critical", "description": "Multi-Admin Approval is not configured. CISA 2026 advisory recommends this for all Intune tenants." }
+    ]
+  },
+  "complianceReality": {
+    "score": 58,
+    "totalDevices": 120,
+    "staleDevices": [
+      { "id": "d-045", "name": "DESKTOP-045", "user": "user1@contoso.com", "daysSinceSync": 12.3, "lastSync": "2026-05-17T08:30:00.000Z" },
+      { "id": "d-067", "name": "LAPTOP-067", "user": "user2@contoso.com", "daysSinceSync": 9.8, "lastSync": "2026-05-19T14:15:00.000Z" },
+      { "id": "d-089", "name": "DESKTOP-089", "user": "user3@contoso.com", "daysSinceSync": 15.2, "lastSync": "2026-05-14T11:00:00.000Z" },
+      { "id": "d-102", "name": "SURFACE-102", "user": "user4@contoso.com", "daysSinceSync": 8.5, "lastSync": "2026-05-20T16:45:00.000Z" },
+      { "id": "d-034", "name": "LAPTOP-034", "user": "user5@contoso.com", "daysSinceSync": 22.1, "lastSync": "2026-05-07T09:30:00.000Z" },
+      { "id": "d-056", "name": "DESKTOP-056", "user": "user6@contoso.com", "daysSinceSync": 11.4, "lastSync": "2026-05-18T10:00:00.000Z" },
+      { "id": "d-078", "name": "LAPTOP-078", "user": "user7@contoso.com", "daysSinceSync": 14.7, "lastSync": "2026-05-15T13:20:00.000Z" },
+      { "id": "d-091", "name": "DESKTOP-091", "user": "user8@contoso.com", "daysSinceSync": 18.3, "lastSync": "2026-05-11T07:45:00.000Z" }
+    ],
+    "orphanedDevices": [
+      { "id": "d-112", "name": "OLD-LAPTOP-112", "user": "former-employee@contoso.com", "daysSinceSync": 187.4, "lastSync": "2025-11-23T12:00:00.000Z" },
+      { "id": "d-118", "name": "TERMINATED-DESKTOP-118", "user": "ex-contractor@contoso.com", "daysSinceSync": 245.1, "lastSync": "2025-09-26T15:30:00.000Z" },
+      { "id": "d-099", "name": "UNKNOWN-DESKTOP-099", "user": "unknown@contoso.com", "daysSinceSync": 312.8, "lastSync": "2025-07-21T09:15:00.000Z" }
+    ],
+    "falseGreenDevices": [
+      { "id": "d-022", "name": "LAPTOP-022", "user": "user9@contoso.com", "flags": "riskLevel=medium" },
+      { "id": "d-041", "name": "DESKTOP-041", "user": "user10@contoso.com", "flags": "notEncrypted" },
+      { "id": "d-073", "name": "SURFACE-073", "user": "user11@contoso.com", "flags": "jailbroken; riskLevel=high" },
+      { "id": "d-085", "name": "LAPTOP-085", "user": "user12@contoso.com", "flags": "notEncrypted; riskLevel=medium" },
+      { "id": "d-055", "name": "DESKTOP-055", "user": "user13@contoso.com", "flags": "riskLevel=high" }
+    ],
+    "perDevice": []
+  },
+  "appDiagnostics": {
+    "score": 72,
+    "totalApps": 87,
+    "knownErrors": [
+      { "code": "0x87D13BA2", "description": "Detection rule mismatch — app installed but not detected", "recommendation": "Verify detection rule path/registry matches installer output" },
+      { "code": "0x80070002", "description": "Installer executable not found in .intunewin package", "recommendation": "Rebuild .intunewin with correct setup file path" },
+      { "code": "0x87D1041C", "description": "Device non-compliant — Conditional Access blocks app delivery", "recommendation": "Check compliance policy and CA exclusions" },
+      { "code": "0x87D101F4", "description": "IME timeout — installer exceeded 60-minute window", "recommendation": "Split large installers or increase timeout via registry" },
+      { "code": "0x80180014", "description": "Device already enrolled in another tenant", "recommendation": "Delete stale device record from Entra ID and Intune" },
+      { "code": "0x80070570", "description": "Corrupt installer file", "recommendation": "Re-download and repackage the installer" }
+    ],
+    "errorSummary": {},
+    "deviceFailureRate": {
+      "DESKTOP-045": { "issues": "nonCompliant=noncompliant", "likelyImpact": "App delivery blocked by Conditional Access" },
+      "LAPTOP-067": { "issues": "nonCompliant=noncompliant", "likelyImpact": "App delivery blocked by Conditional Access" },
+      "DESKTOP-089": { "issues": "nonCompliant=noncompliant", "likelyImpact": "App delivery blocked by Conditional Access" },
+      "SURFACE-102": { "issues": "nonCompliant=noncompliant", "likelyImpact": "App delivery blocked by Conditional Access" },
+      "LAPTOP-034": { "issues": "nonCompliant=noncompliant", "likelyImpact": "App delivery blocked by Conditional Access" },
+      "DESKTOP-056": { "issues": "nonCompliant=noncompliant", "likelyImpact": "App delivery blocked by Conditional Access" },
+      "LAPTOP-078": { "issues": "nonCompliant=noncompliant", "likelyImpact": "App delivery blocked by Conditional Access" }
+    },
+    "topErrors": [
+      { "code": "0x87D13BA2", "description": "Detection rule mismatch — app installed but not detected", "recommendation": "Verify detection rule path/registry matches installer output" },
+      { "code": "0x80070002", "description": "Installer executable not found in .intunewin package", "recommendation": "Rebuild .intunewin with correct setup file path" },
+      { "code": "0x87D1041C", "description": "Device non-compliant — Conditional Access blocks app delivery", "recommendation": "Check compliance policy and CA exclusions" },
+      { "code": "0x87D101F4", "description": "IME timeout — installer exceeded 60-minute window", "recommendation": "Split large installers or increase timeout via registry" },
+      { "code": "0x80180014", "description": "Device already enrolled in another tenant", "recommendation": "Delete stale device record from Entra ID and Intune" }
+    ]
+  },
+  "thirdPartyPatches": {
+    "score": 53,
+    "knownAppCatalog": {
+      "7-Zip": { "latest": "24.09", "critical": true, "cveRisk": "High" },
+      "Adobe Acrobat Reader": { "latest": "24.003", "critical": true, "cveRisk": "Critical" },
+      "Adobe Acrobat Pro": { "latest": "24.003", "critical": true, "cveRisk": "Critical" },
+      "Google Chrome": { "latest": "125.0", "critical": true, "cveRisk": "Critical" },
+      "Mozilla Firefox": { "latest": "127.0", "critical": true, "cveRisk": "High" },
+      "Microsoft Edge": { "latest": "125.0", "critical": true, "cveRisk": "High" },
+      "Java Runtime": { "latest": "8u421", "critical": true, "cveRisk": "Critical" },
+      "Java Development Kit": { "latest": "22", "critical": true, "cveRisk": "Critical" },
+      "Python": { "latest": "3.13", "critical": false, "cveRisk": "Medium" },
+      "Node.js": { "latest": "22.0", "critical": false, "cveRisk": "Medium" },
+      "Notepad++": { "latest": "8.7", "critical": false, "cveRisk": "Medium" },
+      "VLC Media Player": { "latest": "3.0.21", "critical": false, "cveRisk": "Medium" },
+      "TeamViewer": { "latest": "15.57", "critical": true, "cveRisk": "High" },
+      "Zoom": { "latest": "6.1.0", "critical": false, "cveRisk": "Medium" },
+      "Slack": { "latest": "4.39", "critical": false, "cveRisk": "Low" },
+      "WinSCP": { "latest": "6.3", "critical": false, "cveRisk": "Medium" },
+      "PuTTY": { "latest": "0.81", "critical": false, "cveRisk": "Medium" },
+      "PowerShell 7": { "latest": "7.4", "critical": false, "cveRisk": "Medium" },
+      "OpenSSL": { "latest": "3.3.0", "critical": true, "cveRisk": "Critical" },
+      "VMware Tools": { "latest": "12.4", "critical": false, "cveRisk": "Medium" }
+    },
+    "vulnerableDevices": [
+      { "name": "DESKTOP-015", "user": "user14@contoso.com", "issue": "Outdated Windows 10 build", "detail": "Windows 10 1809" },
+      { "name": "LAPTOP-033", "user": "user15@contoso.com", "issue": "Outdated Windows 10 build", "detail": "Windows 10 1903" },
+      { "name": "DESKTOP-061", "user": "user16@contoso.com", "issue": "Outdated Windows 10 build", "detail": "Windows 10 1809" }
+    ],
+    "outdatedApps": [
+      { "displayName": "Google Chrome", "version": "120.0.6099.71", "latestVersion": "125.0", "critical": true, "cveRisk": "Critical" },
+      { "displayName": "Adobe Acrobat Reader DC", "version": "23.001.20093", "latestVersion": "24.003", "critical": true, "cveRisk": "Critical" },
+      { "displayName": "7-Zip 23.01", "version": "23.01", "latestVersion": "24.09", "critical": true, "cveRisk": "High" },
+      { "displayName": "Java 8 Update 381", "version": "1.8.0_381", "latestVersion": "8u421", "critical": true, "cveRisk": "Critical" },
+      { "displayName": "Mozilla Firefox", "version": "115.0.2", "latestVersion": "127.0", "critical": true, "cveRisk": "High" },
+      { "displayName": "TeamViewer 15", "version": "15.42.3", "latestVersion": "15.57", "critical": true, "cveRisk": "High" },
+      { "displayName": "OpenSSL 1.1.1", "version": "1.1.1w", "latestVersion": "3.3.0", "critical": true, "cveRisk": "Critical" },
+      { "displayName": "Notepad++", "version": "8.5.6", "latestVersion": "8.7", "critical": false, "cveRisk": "Medium" },
+      { "displayName": "VLC Media Player", "version": "3.0.18", "latestVersion": "3.0.21", "critical": false, "cveRisk": "Medium" },
+      { "displayName": "Node.js", "version": "20.11.0", "latestVersion": "22.0", "critical": false, "cveRisk": "Medium" }
+    ],
+    "totalOutdated": 10,
+    "criticalOutdated": 7
+  },
+  "trends": {},
+  "recommendations": [
+    { "priority": "critical", "area": "Tier 0 Security", "text": "Enable Multi-Admin Approval to comply with CISA 2026 advisory and prevent single-admin bulk wipe" },
+    { "priority": "critical", "area": "Security", "text": "7 critical security anomalies detected — review audit logs and consider Multi-Admin Approval" },
+    { "priority": "critical", "area": "Compliance Accuracy", "text": "5 compliant devices have active risk signals (encryption/risk/jailbreak) — review compliance policies" },
+    { "priority": "high", "area": "Policy Conflicts", "text": "Resolve 4 conflicting settings to prevent unpredictable device behavior" },
+    { "priority": "high", "area": "Device Cleanup", "text": "3 orphaned devices (>90 days) should be retired to keep inventory accurate" },
+    { "priority": "high", "area": "Patch Management", "text": "7 critical third-party apps are outdated — prioritize updates for browsers, Java, Adobe, VPN clients" },
+    { "priority": "medium", "area": "Device Hygiene", "text": "8 devices haven't synced in 7+ days — investigate connectivity or re-enroll" },
+    { "priority": "info", "area": "Historical Data", "text": "Schedule this script to run daily to enable trend tracking and compliance velocity metrics" }
+  ],
+  "_metadata": {
+    "generatedBy": "Invoke-IntuneVisibilityToolkit.ps1",
+    "generatedAt": "2026-05-29 14:30:00",
+    "policyCount": 47,
+    "deviceCount": 120,
+    "modulesRun": ["Policy Conflicts", "Security Audit", "Compliance Reality", "App Diagnostics", "Third-Party Patches"],
+    "overallScore": 62,
+    "totalFindings": 18,
+    "criticalFindings": 4,
+    "warningFindings": 11
+  }
+}

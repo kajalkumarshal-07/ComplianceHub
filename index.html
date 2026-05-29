@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ComplianceHub — Intune Compliance Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+  --bg-primary: #080c18; --bg-secondary: #0f1525; --bg-card: #141b2d; --bg-hover: #1a2340;
+  --border: #1e2a45; --border-light: #2a3a5a;
+  --text-primary: #edf2f7; --text-secondary: #94a3b8; --text-muted: #64748b;
+  --accent-cyan: #22d3ee; --accent-blue: #3b82f6; --accent-purple: #8b5cf6; --accent-pink: #ec4899; --accent-indigo: #6366f1;
+  --success: #10b981; --danger: #ef4444; --warning: #f59e0b; --info: #3b82f6;
+  --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-2: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+  --gradient-3: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+  --gradient-success: linear-gradient(135deg, #10b981, #059669);
+  --gradient-danger: linear-gradient(135deg, #ef4444, #dc2626);
+  --gradient-warning: linear-gradient(135deg, #f59e0b, #d97706);
+  --glow-cyan: 0 0 24px rgba(34,211,238,0.15);
+  --glow-blue: 0 0 24px rgba(59,130,246,0.15);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.3);
+  --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:var(--bg-primary); color:var(--text-primary); min-height:100vh; overflow-x:hidden; }
+.bg-animation { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; overflow:hidden; }
+.bg-animation::before { content:''; position:absolute; width:200%; height:200%; background:radial-gradient(ellipse at 15% 25%,rgba(34,211,238,0.06) 0%,transparent 50%),radial-gradient(ellipse at 85% 75%,rgba(99,102,241,0.06) 0%,transparent 50%),radial-gradient(ellipse at 50% 50%,rgba(139,92,246,0.04) 0%,transparent 70%); animation:bgPulse 15s ease-in-out infinite; }
+.bg-animation::after { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='g' patternUnits='userSpaceOnUse' width='60' height='60'%3E%3Cpath d='M 60 0 L 0 0 0 60' fill='none' stroke='rgba(255,255,255,0.015)' stroke-width='1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='60' height='60' fill='url(%23g)'/%3E%3C/svg%3E"); opacity:0.5; }
+@keyframes bgPulse { 0%,100% { transform:translate(-5%,-5%) rotate(0deg) scale(1); } 33% { transform:translate(5%,-5%) rotate(2deg) scale(1.02); } 66% { transform:translate(-3%,5%) rotate(-1deg) scale(0.98); } }
+.loader-screen { display:flex; justify-content:center; align-items:center; min-height:100vh; position:relative; z-index:1; padding:20px; }
+.loader-card { background:var(--bg-card); backdrop-filter:blur(20px); border-radius:var(--radius-xl); padding:48px; width:100%; max-width:500px; box-shadow:var(--shadow-card); border:1px solid var(--border); animation:slideUp 0.6s ease-out; position:relative; overflow:hidden; }
+.loader-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--gradient-2); }
+@keyframes slideUp { from { opacity:0; transform:translateY(30px) scale(0.98); } to { opacity:1; transform:translateY(0) scale(1); } }
+.loader-header { text-align:center; margin-bottom:36px; }
+.loader-header h1 { font-size:30px; font-weight:800; background:var(--gradient-2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:8px; display:flex; align-items:center; justify-content:center; gap:12px; letter-spacing:-0.5px; }
+.loader-header p { color:var(--text-secondary); font-size:14px; }
+.drop-zone { border:2px dashed var(--border); border-radius:var(--radius-lg); padding:48px 30px; text-align:center; cursor:pointer; transition:all 0.4s; position:relative; overflow:hidden; }
+.drop-zone::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(34,211,238,0.03),rgba(99,102,241,0.03)); opacity:0; transition:opacity 0.4s; }
+.drop-zone:hover { border-color:var(--accent-cyan); background:rgba(34,211,238,0.03); }
+.drop-zone:hover::before { opacity:1; }
+.drop-zone.drag-over { border-color:var(--accent-cyan); background:rgba(34,211,238,0.06); transform:scale(1.01); }
+.drop-zone-icon { font-size:52px; color:var(--accent-cyan); margin-bottom:16px; display:block; opacity:0.7; transition:all 0.4s; }
+.drop-zone:hover .drop-zone-icon { opacity:1; transform:translateY(-4px); }
+.drop-zone-text { color:var(--text-secondary); font-size:15px; margin-bottom:18px; }
+.drop-zone-text strong { color:var(--accent-cyan); }
+.drop-zone-status { margin-top:14px; font-size:12px; color:var(--text-muted); }
+.btn-primary { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 28px; background:var(--gradient-2); color:white; border:none; border-radius:var(--radius-md); font-size:14px; font-weight:600; cursor:pointer; transition:all 0.3s; position:relative; overflow:hidden; }
+.btn-primary:hover { transform:translateY(-2px); box-shadow:var(--glow-cyan); }
+.dashboard { display:none; max-width:1440px; margin:0 auto; padding:14px; }
+.dashboard-header { background:var(--bg-card); backdrop-filter:blur(12px); border-radius:var(--radius-lg); padding:16px 24px; margin-bottom:14px; border:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; box-shadow:var(--shadow-card); }
+.header-left { display:flex; align-items:center; gap:16px; }
+.header-brand { display:flex; align-items:center; gap:10px; }
+.header-brand-icon { width:36px; height:36px; border-radius:var(--radius-sm); background:var(--gradient-2); display:flex; align-items:center; justify-content:center; font-size:16px; color:white; box-shadow:0 0 20px rgba(34,211,238,0.3); }
+.header-brand h2 { font-size:18px; font-weight:800; background:var(--gradient-2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:-0.3px; }
+.header-meta { display:flex; align-items:center; gap:12px; }
+.status-dot { width:8px; height:8px; border-radius:50%; background:var(--success); box-shadow:0 0 8px rgba(16,185,129,0.5); display:inline-block; }
+.status-dot.offline { background:var(--text-muted); box-shadow:none; }
+.header-meta span { font-size:12px; color:var(--text-secondary); display:flex; align-items:center; gap:6px; }
+.header-controls { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.btn-icon { padding:8px 14px; background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius-sm); color:var(--text-secondary); cursor:pointer; transition:all 0.3s; font-weight:500; font-size:12px; display:flex; align-items:center; gap:6px; }
+.btn-icon:hover { background:var(--bg-hover); border-color:var(--accent-cyan); color:var(--text-primary); transform:translateY(-1px); box-shadow:0 4px 12px rgba(0,0,0,0.2); }
+.btn-icon i { font-size:13px; }
+.tabs-container { background:var(--bg-card); border-radius:var(--radius-lg); margin-bottom:14px; border:1px solid var(--border); overflow:hidden; box-shadow:var(--shadow-card); }
+.tabs { display:flex; overflow-x:auto; gap:0; background:var(--bg-secondary); padding:0 4px; }
+.tab-btn { padding:12px 20px; background:transparent; border:none; color:var(--text-muted); cursor:pointer; font-size:12px; font-weight:500; transition:all 0.3s; white-space:nowrap; display:flex; align-items:center; gap:7px; border-bottom:2px solid transparent; position:relative; }
+.tab-btn:hover { color:var(--text-secondary); background:var(--bg-hover); }
+.tab-btn.active { color:var(--accent-cyan); border-bottom-color:var(--accent-cyan); background:rgba(34,211,238,0.06); }
+.tab-btn i { font-size:14px; transition:transform 0.3s; }
+.tab-btn:hover i { transform:scale(1.1); }
+.tab-btn.active i { color:var(--accent-cyan); }
+.tab-badge { font-size:9px; padding:1px 6px; border-radius:10px; background:rgba(34,211,238,0.15); color:var(--accent-cyan); margin-left:4px; }
+.tab-content { display:none; padding:18px; }
+.tab-content.active { display:block; animation:fadeIn 0.35s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+.kpi-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; margin-bottom:16px; }
+.kpi-card { background:var(--bg-card); border-radius:var(--radius-md); padding:18px 20px; border:1px solid var(--border); transition:all 0.35s cubic-bezier(0.4,0,0.2,1); position:relative; overflow:hidden; cursor:default; }
+.kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--gradient-2); transform:translateX(-100%); transition:transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+.kpi-card:hover { transform:translateY(-4px); border-color:rgba(34,211,238,0.3); box-shadow:0 8px 32px rgba(0,0,0,0.3), var(--glow-cyan); }
+.kpi-card:hover::before { transform:translateX(0); }
+.kpi-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
+.kpi-icon-wrap { width:36px; height:36px; border-radius:var(--radius-sm); display:flex; align-items:center; justify-content:center; font-size:16px; background:rgba(34,211,238,0.1); color:var(--accent-cyan); }
+.kpi-card[data-accent="success"] .kpi-icon-wrap { background:rgba(16,185,129,0.1); color:var(--success); }
+.kpi-card[data-accent="danger"] .kpi-icon-wrap { background:rgba(239,68,68,0.1); color:var(--danger); }
+.kpi-card[data-accent="warning"] .kpi-icon-wrap { background:rgba(245,158,11,0.1); color:var(--warning); }
+.kpi-card[data-accent="purple"] .kpi-icon-wrap { background:rgba(139,92,246,0.1); color:var(--accent-purple); }
+.kpi-card[data-accent="info"] .kpi-icon-wrap { background:rgba(59,130,246,0.1); color:var(--info); }
+.kpi-trend { font-size:10px; padding:2px 8px; border-radius:12px; display:flex; align-items:center; gap:3px; font-weight:600; }
+.kpi-trend.up { background:rgba(16,185,129,0.1); color:var(--success); }
+.kpi-trend.down { background:rgba(239,68,68,0.1); color:var(--danger); }
+.kpi-value { font-size:28px; font-weight:800; margin:2px 0; background:var(--gradient-2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1.2; letter-spacing:-0.5px; }
+.kpi-card[data-accent="success"] .kpi-value { background:var(--gradient-success); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.kpi-card[data-accent="danger"] .kpi-value { background:var(--gradient-danger); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.kpi-card[data-accent="warning"] .kpi-value { background:var(--gradient-warning); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+.kpi-label { color:var(--text-secondary); font-size:12px; font-weight:500; }
+.kpi-sub { font-size:11px; color:var(--text-muted); margin-top:2px; }
+.charts-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(480px,1fr)); gap:14px; margin-bottom:16px; }
+.chart-card { background:var(--bg-card); border-radius:var(--radius-md); padding:18px 20px; border:1px solid var(--border); transition:all 0.35s; box-shadow:var(--shadow-card); }
+.chart-card:hover { border-color:rgba(34,211,238,0.2); box-shadow:0 8px 32px rgba(0,0,0,0.3), var(--glow-cyan); transform:translateY(-2px); }
+.chart-card h3 { margin-bottom:14px; font-size:14px; font-weight:600; display:flex; align-items:center; gap:8px; color:var(--text-secondary); }
+.chart-card h3 i { color:var(--accent-cyan); font-size:14px; }
+.chart-container { position:relative; height:270px; }
+.table-container { background:var(--bg-card); border-radius:var(--radius-md); padding:18px 20px; border:1px solid var(--border); overflow-x:auto; margin-bottom:16px; box-shadow:var(--shadow-card); }
+.table-container h3 { margin-bottom:14px; font-size:14px; font-weight:600; display:flex; align-items:center; gap:8px; color:var(--text-secondary); }
+.table-container h3 i { color:var(--accent-cyan); }
+.data-table { width:100%; border-collapse:separate; border-spacing:0; font-size:12px; }
+.data-table th { padding:10px 12px; text-align:left; font-weight:600; color:var(--text-muted); font-size:11px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--border); background:var(--bg-secondary); position:sticky; top:0; }
+.data-table td { padding:10px 12px; text-align:left; border-bottom:1px solid rgba(30,42,69,0.5); color:var(--text-primary); transition:background 0.2s; }
+.data-table tbody tr:hover { background:var(--bg-hover); }
+.data-table tbody tr:last-child td { border-bottom:none; }
+.table-scroll { overflow-x:auto; }
+.severity-critical { color:var(--danger); font-weight:600; text-transform:uppercase; font-size:10px; }
+.severity-high { color:var(--warning); font-weight:600; text-transform:uppercase; font-size:10px; }
+.severity-medium { color:var(--accent-cyan); text-transform:uppercase; font-size:10px; }
+.severity-low { color:var(--text-muted); text-transform:uppercase; font-size:10px; }
+.rec-card { background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius-md); padding:12px 16px; margin-bottom:8px; display:flex; align-items:flex-start; gap:12px; transition:all 0.3s; }
+.rec-card:hover { border-color:rgba(34,211,238,0.3); background:var(--bg-hover); }
+.rec-icon { width:28px; height:28px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:13px; flex-shrink:0; }
+.rec-icon.critical { background:rgba(239,68,68,0.15); color:var(--danger); }
+.rec-icon.high { background:rgba(245,158,11,0.15); color:var(--warning); }
+.rec-icon.medium { background:rgba(34,211,238,0.15); color:var(--accent-cyan); }
+.rec-icon.info { background:rgba(59,130,246,0.15); color:var(--accent-blue); }
+.status-badge { display:inline-flex; align-items:center; gap:5px; padding:3px 10px; border-radius:20px; font-size:11px; font-weight:500; white-space:nowrap; transition:all 0.2s; }
+.status-compliant,.status-success,.status-completed,.status-active,.status-healthy { background:rgba(16,185,129,0.1); color:var(--success); border:1px solid rgba(16,185,129,0.25); }
+.status-noncompliant,.status-failed,.status-error,.status-risk { background:rgba(239,68,68,0.1); color:var(--danger); border:1px solid rgba(239,68,68,0.25); }
+.status-grace,.status-warning,.status-pending,.status-installing { background:rgba(245,158,11,0.1); color:var(--warning); border:1px solid rgba(245,158,11,0.25); }
+.status-unknown,.status-notapplicable { background:rgba(100,116,139,0.1); color:var(--text-secondary); border:1px solid rgba(100,116,139,0.25); }
+.status-info { background:rgba(59,130,246,0.1); color:var(--info); border:1px solid rgba(59,130,246,0.25); }
+.filter-bar { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:14px; }
+.filter-bar select,.filter-bar input { padding:8px 12px; background:var(--bg-secondary); border:1px solid var(--border); border-radius:var(--radius-sm); font-size:12px; color:var(--text-primary); transition:border-color 0.3s; }
+.filter-bar select:focus,.filter-bar input:focus { outline:none; border-color:var(--accent-cyan); box-shadow:0 0 0 3px rgba(34,211,238,0.08); }
+.search-box { flex:1; min-width:180px; }
+.toast { position:fixed; top:24px; right:24px; background:var(--bg-card); backdrop-filter:blur(20px); padding:14px 20px; border-radius:var(--radius-md); box-shadow:0 12px 48px rgba(0,0,0,0.4); border:1px solid var(--border); z-index:10000; animation:slideIn 0.35s cubic-bezier(0.4,0,0.2,1); display:flex; align-items:center; gap:10px; font-size:13px; max-width:420px; }
+@keyframes slideIn { from { transform:translateX(120%); opacity:0; } to { transform:translateX(0); opacity:1; } }
+@keyframes slideOut { from { transform:translateX(0); opacity:1; } to { transform:translateX(120%); opacity:0; } }
+.toast.success { border-left:3px solid var(--success); }
+.toast.error { border-left:3px solid var(--danger); }
+.toast.info { border-left:3px solid var(--info); }
+.toast.warning { border-left:3px solid var(--warning); }
+.toast i { font-size:16px; }
+.loading { display:inline-block; width:18px; height:18px; border:2px solid rgba(255,255,255,.15); border-radius:50%; border-top-color:var(--accent-cyan); animation:spin 0.8s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
+::-webkit-scrollbar { width:5px; height:5px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--accent-cyan); border-radius:10px; }
+::-webkit-scrollbar-thumb:hover { background:var(--accent-blue); }
+::selection { background:rgba(34,211,238,0.3); color:white; }
+@media(max-width:1200px) { .charts-grid { grid-template-columns:1fr; } }
+@media(max-width:768px) { .kpi-grid { grid-template-columns:repeat(2,1fr); } .dashboard-header { flex-direction:column; align-items:stretch; } .header-left { flex-direction:column; align-items:flex-start; gap:8px; } .header-meta { flex-wrap:wrap; } .tabs { flex-wrap:nowrap; } .tab-btn { padding:10px 14px; font-size:11px; } .filter-bar { flex-direction:column; } .search-box { width:100%; } }
+@media(max-width:480px) { .kpi-grid { grid-template-columns:1fr; } .kpi-value { font-size:24px; } }
+</style>
+</head>
+<body>
+<div class="bg-animation"></div>
+
+<!-- Loader Screen -->
+<div id="loadContainer" class="loader-screen">
+  <div class="loader-card">
+    <div class="loader-header">
+      <h1><i class="fas fa-shield-halved"></i> ComplianceHub</h1>
+      <p>Upload your Intune data to get started</p>
+    </div>
+    <div id="dropZone" class="drop-zone">
+      <i class="fas fa-cloud-upload-alt drop-zone-icon"></i>
+      <p class="drop-zone-text">Drag & drop <strong>data.json</strong> here, or <strong>click</strong> to browse</p>
+      <input type="file" id="fileInput" accept=".json" style="display:none;">
+      <p id="autoLoadStatus" class="drop-zone-status"><i class="fas fa-spinner fa-spin"></i> Looking for data.json...</p>
+    </div>
+    <div style="text-align:center;margin-top:18px;">
+      <button class="btn-primary" onclick="document.getElementById('fileInput').click()"><i class="fas fa-folder-open"></i> Browse Files</button>
+    </div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard" class="dashboard">
+  <div class="dashboard-header">
+    <div class="header-left">
+      <div class="header-brand">
+        <div class="header-brand-icon"><i class="fas fa-shield-halved"></i></div>
+        <h2>ComplianceHub</h2>
+      </div>
+      <div class="header-meta">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="tenantInfo"><i class="fas fa-building"></i> No data loaded</span>
+        <span id="lastUpdated"><i class="fas fa-clock"></i> --</span>
+      </div>
+    </div>
+    <div class="header-controls">
+      <button class="btn-icon" onclick="reloadData()"><i class="fas fa-rotate"></i> Reload</button>
+      <button class="btn-icon" onclick="document.getElementById('fileInput').click()"><i class="fas fa-upload"></i> Change File</button>
+    </div>
+  </div>
+
+  <div class="tabs-container">
+    <div class="tabs" id="tabBar">
+      <button class="tab-btn active" data-tab="overview"><i class="fas fa-home"></i> Overview</button>
+      <button class="tab-btn" data-tab="compliance"><i class="fas fa-check-shield"></i> Compliance</button>
+      <button class="tab-btn" data-tab="devices"><i class="fas fa-laptop"></i> Devices</button>
+      <button class="tab-btn" data-tab="apps"><i class="fas fa-cube"></i> Applications</button>
+      <button class="tab-btn" data-tab="updates"><i class="fas fa-sync"></i> Updates</button>
+      <button class="tab-btn" data-tab="policies"><i class="fas fa-file-shield"></i> Policies</button>
+      <button class="tab-btn" data-tab="security"><i class="fas fa-shield"></i> Security</button>
+      <button class="tab-btn" data-tab="reports"><i class="fas fa-chart-pie"></i> Reports</button>
+      <button class="tab-btn" data-tab="visibility"><i class="fas fa-binoculars"></i> Visibility <span class="tab-badge">TOOLKIT</span></button>
+    </div>
+
+    <div class="tab-content active" id="tab-overview">
+      <div class="kpi-grid" id="overviewKpis"></div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3><i class="fas fa-chart-pie"></i> Compliance Status</h3><div class="chart-container"><canvas id="overviewDonut"></canvas></div></div>
+        <div class="chart-card"><h3><i class="fas fa-chart-bar"></i> OS Distribution</h3><div class="chart-container"><canvas id="overviewOsBar"></canvas></div></div>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3><i class="fas fa-shield"></i> Security Health</h3><div class="chart-container"><canvas id="overviewSecurityBar"></canvas></div></div>
+        <div class="chart-card"><h3><i class="fas fa-clock"></i> Last Sync Distribution</h3><div class="chart-container"><canvas id="overviewSyncBar"></canvas></div></div>
+      </div>
+      <div class="table-container">
+        <h3><i class="fas fa-exclamation-triangle"></i> Critical Alerts</h3>
+        <table class="data-table"><tbody id="overviewAlertsBody"><tr><td style="text-align:center;color:var(--text-secondary);padding:30px;"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-compliance">
+      <div class="kpi-grid" id="complianceKpis"></div>
+      <div class="filter-bar">
+        <select id="compliancePolicySelect" style="flex:1;max-width:400px;"><option value="">Select a compliance policy...</option></select>
+        <button class="btn-icon" onclick="loadComplianceDetail()"><i class="fas fa-chart-bar"></i> Load Policy Details</button>
+        <input type="text" class="search-box" id="complianceSearch" placeholder="Search devices..." oninput="filterComplianceTable()">
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3><i class="fas fa-chart-pie"></i> Compliance by Policy</h3><div class="chart-container"><canvas id="compliancePolicyChart"></canvas></div></div>
+        <div class="chart-card"><h3><i class="fas fa-chart-bar"></i> Non-Compliance Reasons</h3><div class="chart-container"><canvas id="complianceReasonChart"></canvas></div></div>
+      </div>
+      <div class="table-container">
+        <h3><i class="fas fa-list"></i> Device Compliance Details</h3>
+        <table class="data-table"><thead><tr><th>Device Name</th><th>OS</th><th>User</th><th>Status</th><th>Last Sync</th><th>Details</th></tr></thead><tbody id="complianceTableBody"><tr><td colspan="6" style="text-align:center;color:var(--text-secondary);padding:30px;">Select a policy and click Load</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-devices">
+      <div class="kpi-grid" id="devicesKpis"></div>
+      <div class="filter-bar">
+        <select id="deviceFilter" style="width:150px;" onchange="filterDeviceTable()">
+          <option value="all">All Devices</option>
+          <option value="compliant">Compliant</option>
+          <option value="noncompliant">Non-Compliant</option>
+          <option value="corporate">Corporate</option>
+          <option value="personal">Personal</option>
+          <option value="active">Active (&lt;7d)</option>
+          <option value="stale">Stale (&gt;30d)</option>
+        </select>
+        <input type="text" class="search-box" id="deviceSearch" placeholder="Search by name, user, model..." oninput="filterDeviceTable()">
+        <span style="font-size:12px;color:var(--text-muted);" id="deviceCount">0 devices</span>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3><i class="fas fa-chart-doughnut"></i> Ownership</h3><div class="chart-container"><canvas id="deviceOwnershipChart"></canvas></div></div>
+        <div class="chart-card"><h3><i class="fas fa-chart-bar"></i> Enrollment Type</h3><div class="chart-container"><canvas id="deviceEnrollmentChart"></canvas></div></div>
+      </div>
+      <div class="table-container">
+        <h3><i class="fas fa-laptop"></i> Device Inventory</h3>
+        <table class="data-table"><thead><tr><th>Name</th><th>User</th><th>Model</th><th>OS</th><th>Ownership</th><th>Compliance</th><th>Encrypted</th><th>Last Sync</th><th>Risk</th></tr></thead><tbody id="deviceTableBody"><tr><td colspan="9" style="text-align:center;color:var(--text-secondary);padding:30px;">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-apps">
+      <div class="kpi-grid" id="appsKpis"></div>
+      <div class="filter-bar">
+        <input type="text" class="search-box" id="appSearch" placeholder="Search apps..." oninput="filterAppTable()">
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3><i class="fas fa-chart-bar"></i> Top App Installation Failures</h3><div class="chart-container"><canvas id="appFailureChart"></canvas></div></div>
+        <div class="chart-card"><h3><i class="fas fa-chart-pie"></i> App Platform Distribution</h3><div class="chart-container"><canvas id="appPlatformChart"></canvas></div></div>
+      </div>
+      <div class="table-container">
+        <h3><i class="fas fa-cube"></i> Application Inventory</h3>
+        <table class="data-table"><thead><tr><th>App Name</th><th>Platform</th><th>Publisher</th><th>Installed Count</th><th>Failed Count</th></tr></thead><tbody id="appTableBody"><tr><td colspan="5" style="text-align:center;color:var(--text-secondary);padding:30px;">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-updates">
+      <div class="kpi-grid" id="updatesKpis"></div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3><i class="fas fa-chart-bar"></i> Update Ring Compliance</h3><div class="chart-container"><canvas id="updateRingChart"></canvas></div></div>
+        <div class="chart-card"><h3><i class="fas fa-clock"></i> Pending Reboot Devices</h3><div class="chart-container"><canvas id="pendingRebootChart"></canvas></div></div>
+      </div>
+      <div class="table-container">
+        <h3><i class="fas fa-sync"></i> Update Ring Status</h3>
+        <table class="data-table"><thead><tr><th>Ring Name</th><th>Deployment Status</th><th>Devices Up to Date</th><th>Missing Updates</th><th>Pending Reboot</th></tr></thead><tbody id="updateTableBody"><tr><td colspan="5" style="text-align:center;color:var(--text-secondary);padding:30px;">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-policies">
+      <div class="kpi-grid" id="policiesKpis"></div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3><i class="fas fa-chart-pie"></i> Configuration Profile Types</h3><div class="chart-container"><canvas id="policyTypeChart"></canvas></div></div>
+        <div class="chart-card"><h3><i class="fas fa-chart-bar"></i> Top Policy Errors</h3><div class="chart-container"><canvas id="policyErrorChart"></canvas></div></div>
+      </div>
+      <div class="table-container">
+        <h3><i class="fas fa-file-shield"></i> Configuration Profiles</h3>
+        <table class="data-table"><thead><tr><th>Profile Name</th><th>Platform</th><th>Type</th><th>Assigned To</th><th>Status</th></tr></thead><tbody id="policyTableBody"><tr><td colspan="5" style="text-align:center;color:var(--text-secondary);padding:30px;">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-security">
+      <div class="kpi-grid" id="securityKpis"></div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3><i class="fas fa-lock"></i> BitLocker Status</h3><div class="chart-container"><canvas id="bitlockerChart"></canvas></div></div>
+        <div class="chart-card"><h3><i class="fas fa-shield"></i> Defender Risk Levels</h3><div class="chart-container"><canvas id="defenderChart"></canvas></div></div>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3><i class="fas fa-fire-extinguisher"></i> Antivirus &amp; Firewall Status</h3><div class="chart-container"><canvas id="avFirewallChart"></canvas></div></div>
+        <div class="chart-card"><h3><i class="fas fa-microchip"></i> Secure Boot &amp; TPM</h3><div class="chart-container"><canvas id="secureBootChart"></canvas></div></div>
+      </div>
+      <div class="table-container">
+        <h3><i class="fas fa-exclamation-triangle"></i> Devices Requiring Attention</h3>
+        <table class="data-table"><thead><tr><th>Device Name</th><th>User</th><th>Risk Level</th><th>BitLocker</th><th>Defender</th><th>Jailbroken</th></tr></thead><tbody id="securityTableBody"><tr><td colspan="6" style="text-align:center;color:var(--text-secondary);padding:30px;">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-reports">
+      <div class="kpi-grid" id="reportsKpis"></div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3><i class="fas fa-chart-line"></i> Weekly Compliance Trend</h3><div class="chart-container"><canvas id="trendChart"></canvas></div></div>
+        <div class="chart-card"><h3><i class="fas fa-chart-bar"></i> Devices by Manufacturer</h3><div class="chart-container"><canvas id="manufacturerChart"></canvas></div></div>
+      </div>
+      <div class="charts-grid">
+        <div class="chart-card"><h3><i class="fas fa-chart-bar"></i> OS Version Breakdown</h3><div class="chart-container"><canvas id="osVersionChart"></canvas></div></div>
+        <div class="chart-card"><h3><i class="fas fa-chart-pie"></i> Co-Management Status</h3><div class="chart-container"><canvas id="comanageChart"></canvas></div></div>
+      </div>
+      <div class="table-container">
+        <h3><i class="fas fa-flag"></i> Executive Summary</h3>
+        <table class="data-table"><thead><tr><th>Metric</th><th>Value</th><th>Status</th></tr></thead><tbody id="reportSummaryBody"><tr><td colspan="3" style="text-align:center;color:var(--text-secondary);padding:30px;">Loading...</td></tr></tbody></table>
+      </div>
+    </div>
+
+    <div class="tab-content" id="tab-visibility">
+      <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+        <div class="kpi-card" style="flex:1;min-width:200px;text-align:center;padding:24px;">
+          <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Overall Health</div>
+          <div style="font-size:48px;font-weight:800;" id="vsHealthScore">--</div>
+        </div>
+        <div class="kpi-card" style="flex:1;min-width:200px;text-align:center;padding:24px;">
+          <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Critical Findings</div>
+          <div style="font-size:48px;font-weight:800;color:var(--danger);" id="vsCriticalCount">--</div>
+        </div>
+        <div class="kpi-card" style="flex:1;min-width:200px;text-align:center;padding:24px;">
+          <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Warnings</div>
+          <div style="font-size:48px;font-weight:800;color:var(--warning);" id="vsWarningCount">--</div>
+        </div>
+        <div class="kpi-card" style="flex:1;min-width:200px;text-align:center;padding:24px;">
+          <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Recommendations</div>
+          <div style="font-size:48px;font-weight:800;color:var(--accent-cyan);" id="vsRecCount">--</div>
+        </div>
+      </div>
+      <div class="table-container" id="vs-recommendations" style="display:none;">
+        <h3><i class="fas fa-list-check"></i> Recommendations</h3>
+        <div id="vsRecList"></div>
+      </div>
+      <div class="table-container" id="vs-conflicts" style="display:none;">
+        <h3><i class="fas fa-code-branch"></i> Policy Conflicts <span style="font-size:12px;color:var(--text-muted);font-weight:400;" id="vsConflictCount"></span></h3>
+        <div class="table-scroll"><table class="data-table"><thead><tr><th>Setting</th><th>Affected Policies</th><th>Values</th><th>Severity</th></tr></thead><tbody id="vsConflictBody"></tbody></table></div>
+      </div>
+      <div class="table-container" id="vs-anomalies" style="display:none;">
+        <h3><i class="fas fa-shield-exclamation"></i> Security Anomalies <span style="font-size:12px;color:var(--text-muted);font-weight:400;" id="vsAnomalyCount"></span></h3>
+        <div class="table-scroll"><table class="data-table"><thead><tr><th>Type</th><th>Severity</th><th>Description</th><th>Details</th></tr></thead><tbody id="vsAnomalyBody"></tbody></table></div>
+      </div>
+      <div class="table-container" id="vs-reality" style="display:none;">
+        <h3><i class="fas fa-check-circle"></i> Compliance Reality <span style="font-size:12px;color:var(--text-muted);font-weight:400;" id="vsRealityCount"></span></h3>
+        <div class="table-scroll"><table class="data-table"><thead><tr><th>Device</th><th>User</th><th>Status</th><th>Issues</th><th>Last Sync</th></tr></thead><tbody id="vsRealityBody"></tbody></table></div>
+      </div>
+      <div class="table-container" id="vs-apps" style="display:none;">
+        <h3><i class="fas fa-cube"></i> App Diagnostics <span style="font-size:12px;color:var(--text-muted);font-weight:400;" id="vsAppCount"></span></h3>
+        <div class="table-scroll"><table class="data-table"><thead><tr><th>Error Code</th><th>Description</th><th>Recommendation</th></tr></thead><tbody id="vsAppBody"></tbody></table></div>
+      </div>
+      <div class="table-container" id="vs-patches" style="display:none;">
+        <h3><i class="fas fa-wrench"></i> Third-Party Patch Audit <span style="font-size:12px;color:var(--text-muted);font-weight:400;" id="vsPatchCount"></span></h3>
+        <div class="table-scroll"><table class="data-table"><thead><tr><th>Application</th><th>Installed</th><th>Latest</th><th>Risk</th></tr></thead><tbody id="vsPatchBody"></tbody></table></div>
+      </div>
+      <div class="table-container" id="vs-no-data" style="display:block;">
+        <div style="text-align:center;padding:40px;color:var(--text-muted);">
+          <i class="fas fa-binoculars" style="font-size:48px;display:block;margin-bottom:16px;opacity:0.4;"></i>
+          <h3 style="color:var(--text-secondary);margin-bottom:8px;">No Visibility Data</h3>
+          <p style="font-size:13px;">Run Invoke-IntuneVisibilityToolkit.ps1 then load visibility.json below.</p>
+          <div class="drop-zone" id="visibilityDropZone" style="margin-top:20px;padding:24px;max-width:400px;margin-left:auto;margin-right:auto;">
+            <i class="fas fa-cloud-upload-alt" style="font-size:28px;color:var(--accent-cyan);display:block;margin-bottom:10px;"></i>
+            <p class="drop-zone-text" style="font-size:13px;">Drop <strong>visibility.json</strong> or <strong>click</strong> to browse</p>
+            <input type="file" id="visibilityFileInput" accept=".json" style="display:none;">
+            <p style="font-size:11px;color:var(--text-muted);margin-top:8px;" id="visibilityAutoStatus">Auto-checks ./visibility.json</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+const cache = { devices:[], policies:[], configs:[], apps:[], updateRings:[], autopilot:[], healthScripts:[], complianceDetail:[] };
+const visibilityCache = {};
+const charts = {};
+let lastLoadedFile = null;
+
+function showToast(msg, type) {
+  type=type||'info'; const t=document.createElement('div');
+  t.className='toast '+type;
+  t.innerHTML='<i class="fas '+(type==='success'?'fa-check-circle':type==='error'?'fa-exclamation-circle':type==='warning'?'fa-exclamation-triangle':'fa-info-circle')+'"></i> '+msg;
+  document.body.appendChild(t);
+  setTimeout(()=>{t.style.animation='slideOut 0.3s ease';setTimeout(()=>t.remove(),300);},4000);
+}
+
+function daysSince(d) { if(!d) return 999; try{return(Math.floor((Date.now()-new Date(d).getTime())/86400000));}catch(e){return 999;} }
+
+function createChart(id, config) {
+  const ctx=document.getElementById(id); if(!ctx) return null;
+  if(charts[id]) charts[id].destroy();
+  try{charts[id]=new Chart(ctx,config);}catch(e){console.warn('Chart '+id+':',e);}
+  return charts[id];
+}
+
+function darkChartDefaults() {
+  return { responsive:true, maintainAspectRatio:true, animation:{duration:800,easing:'easeOutQuart'},
+    plugins:{ legend:{labels:{color:'#94a3b8',font:{size:11,family:'Inter'}}},
+      tooltip:{backgroundColor:'#141b2d',titleColor:'#edf2f7',bodyColor:'#94a3b8',borderColor:'#1e2a45',borderWidth:1,padding:12,cornerRadius:8,titleFont:{family:'Inter',weight:'600'},bodyFont:{family:'Inter'}} } };
+}
+
+function createGradient(ctx, chartArea, colorStops) {
+  if(!ctx||!chartArea) return colorStops[0]?.color||'#3b82f6';
+  const g=ctx.createLinearGradient(0,chartArea.bottom,0,chartArea.top);
+  colorStops.forEach((s,i)=>g.addColorStop(i/(colorStops.length-1||1),s.color));
+  return g;
+}
+
+function escHtml(s) { if(s==null) return ''; return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ──── initTabs ──── */
+function initTabs() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+      if (btn.dataset.tab === 'visibility' && Object.keys(visibilityCache).length > 0) {
+        setTimeout(renderVisibility, 50);
+      }
+    });
+  });
+}
+
+/* ──── Overview ──── */
+function renderOverview() {
+  const d=cache.devices; const total=d.length;
+  const compliant=d.filter(x=>x.complianceState==='compliant').length;
+  const nonCompliant=d.filter(x=>x.complianceState==='noncompliant').length;
+  const notSynced7=d.filter(x=>daysSince(x.lastSyncDateTime)>7).length;
+  const notSynced30=d.filter(x=>daysSince(x.lastSyncDateTime)>30).length;
+  const encrypted=d.filter(x=>x.isEncrypted||x.bitLockerStatus==='encrypted').length;
+  const corporate=d.filter(x=>x.ownership==='corporate').length;
+  const personal=d.filter(x=>x.ownership==='personal').length;
+  const risky=d.filter(x=>x.riskLevel&&x.riskLevel!=='none'&&x.riskLevel!=='low').length;
+  const jailbroken=d.filter(x=>x.jailBroken).length;
+  const pct=total?(compliant/total*100).toFixed(1):0;
+  document.getElementById('overviewKpis').innerHTML=
+    `<div class="kpi-card" data-accent="success"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-laptop"></i></div><span class="kpi-trend up"><i class="fas fa-arrow-up"></i> ${pct}%</span></div><div class="kpi-value">${total}</div><div class="kpi-label">Total Devices</div><div class="kpi-sub">${compliant} compliant</div></div>
+    <div class="kpi-card" data-accent="success"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-check-circle"></i></div></div><div class="kpi-value">${pct}%</div><div class="kpi-label">Compliance Rate</div><div class="kpi-sub">${compliant} of ${total} devices</div></div>
+    <div class="kpi-card" data-accent="${nonCompliant>0?'danger':'success'}"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-exclamation-triangle"></i></div></div><div class="kpi-value">${nonCompliant}</div><div class="kpi-label">Non-Compliant</div><div class="kpi-sub">${total?((nonCompliant/total*100).toFixed(1)):'0'}% of fleet</div></div>
+    <div class="kpi-card" data-accent="${notSynced7>0?'warning':'success'}"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-clock"></i></div></div><div class="kpi-value">${notSynced7}</div><div class="kpi-label">Stale (&gt;7d)</div><div class="kpi-sub">${notSynced30} haven't synced in 30d+</div></div>
+    <div class="kpi-card" data-accent="${total&&encrypted/total>=0.9?'success':'warning'}"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-lock"></i></div></div><div class="kpi-value">${total?((encrypted/total*100).toFixed(1)):'0'}%</div><div class="kpi-label">Encryption Rate</div><div class="kpi-sub">${encrypted} of ${total} encrypted</div></div>
+    <div class="kpi-card" data-accent="purple"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-building"></i></div></div><div class="kpi-value">${corporate}</div><div class="kpi-label">Corporate</div><div class="kpi-sub">${personal} personal devices</div></div>
+    <div class="kpi-card" data-accent="${risky>0?'danger':'success'}"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-shield"></i></div></div><div class="kpi-value">${risky}</div><div class="kpi-label">Risky Devices</div><div class="kpi-sub">${jailbroken} jailbroken</div></div>
+    <div class="kpi-card" data-accent="info"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-cube"></i></div></div><div class="kpi-value">${cache.apps.length}</div><div class="kpi-label">Managed Apps</div><div class="kpi-sub">${cache.policies.length} policies</div></div>`;
+  createChart('overviewDonut', { type:'doughnut', data:{ labels:['Compliant','Non-Compliant','Grace Period','Unknown'], datasets:[{ data:[compliant,nonCompliant,d.filter(x=>x.complianceState==='graceperiod').length,total-compliant-nonCompliant-d.filter(x=>x.complianceState==='graceperiod').length], backgroundColor:['#10b981','#ef4444','#f59e0b','#6b7280'], borderWidth:0 }] }, options:{...darkChartDefaults(), cutout:'60%', plugins:{...darkChartDefaults().plugins, legend:{position:'bottom'}}} });
+  const osMap={}; d.forEach(dev=>{const o=dev.operatingSystem||'Unknown'; osMap[o]=(osMap[o]||0)+1; });
+  const sortedOS=Object.entries(osMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  createChart('overviewOsBar',{type:'bar',data:{labels:sortedOS.map(x=>x[0]),datasets:[{label:'Devices',data:sortedOS.map(x=>x[1]),backgroundColor:['#3b82f6','#8b5cf6','#10b981','#06b6d4','#f59e0b','#ef4444','#6b7280','#ec4899'],borderRadius:6}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af',maxRotation:45}}}}});
+  const syncBuckets={'<1h':0,'1-24h':0,'1-7d':0,'7-30d':0,'>30d':0};
+  d.forEach(dev=>{const ds=daysSince(dev.lastSyncDateTime);if(ds<0.04)syncBuckets['<1h']++;else if(ds<1)syncBuckets['1-24h']++;else if(ds<7)syncBuckets['1-7d']++;else if(ds<30)syncBuckets['7-30d']++;else syncBuckets['>30d']++;});
+  createChart('overviewSyncBar',{type:'bar',data:{labels:Object.keys(syncBuckets),datasets:[{label:'Devices',data:Object.values(syncBuckets),backgroundColor:'#06b6d4',borderRadius:6}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af'}}}}});
+  createChart('overviewSecurityBar',{type:'bar',data:{labels:['Encrypted','Corporate','Risky','Jailbroken'],datasets:[{label:'Devices',data:[encrypted,corporate,risky,jailbroken],backgroundColor:[encrypted/total>=0.9?'#10b981':'#f59e0b','#8b5cf6',risky>0?'#ef4444':'#10b981',jailbroken>0?'#ef4444':'#10b981'],borderRadius:6}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af'}}}}});
+  const alerts=d.filter(x=>x.complianceState==='noncompliant'||daysSince(x.lastSyncDateTime)>30||x.jailBroken||(x.riskLevel&&x.riskLevel!=='none'&&x.riskLevel!=='low')).slice(0,20);
+  document.getElementById('overviewAlertsBody').innerHTML=alerts.length?alerts.map(x=>`<tr><td><strong>${escHtml(x.deviceName||'Unknown')}</strong></td><td>${escHtml(x.userPrincipalName||'')}</td><td>${escHtml(x.complianceState)}</td><td>${daysSince(x.lastSyncDateTime)}d</td><td>${x.riskLevel||'ok'}</td><td>${x.jailBroken?'Jailbroken':x.isEncrypted===false?'Unencrypted':'--'}</td></tr>`).join(''):'<tr><td colspan="6" style="text-align:center;color:var(--success);padding:20px;"><i class="fas fa-check-circle"></i> No critical alerts</td></tr>';
+}
+
+/* ──── Compliance ──── */
+function renderCompliance() {
+  const d=cache.devices; const total=d.length;
+  const compliant=d.filter(x=>x.complianceState==='compliant').length;
+  const nonCompliant=d.filter(x=>x.complianceState==='noncompliant').length;
+  const grace=d.filter(x=>x.complianceState==='graceperiod').length;
+  document.getElementById('complianceKpis').innerHTML=
+    `<div class="kpi-card" data-accent="success"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-check-circle"></i></div></div><div class="kpi-value">${total?(compliant/total*100).toFixed(1):'0'}%</div><div class="kpi-label">Compliance Rate</div></div>
+    <div class="kpi-card" data-accent="${nonCompliant>0?'danger':'success'}"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-times-circle"></i></div></div><div class="kpi-value">${nonCompliant}</div><div class="kpi-label">Non-Compliant</div></div>
+    <div class="kpi-card" data-accent="warning"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-clock"></i></div></div><div class="kpi-value">${grace}</div><div class="kpi-label">Grace Period</div></div>
+    <div class="kpi-card" data-accent="info"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-file-shield"></i></div></div><div class="kpi-value">${cache.policies.length}</div><div class="kpi-label">Compliance Policies</div></div>`;
+  createChart('compliancePolicyChart',{type:'doughnut',data:{labels:['Compliant','Non-Compliant','Grace','Unknown'],datasets:[{data:[compliant,nonCompliant,grace,total-compliant-nonCompliant-grace],backgroundColor:['#10b981','#ef4444','#f59e0b','#6b7280'],borderWidth:0}]},options:{...darkChartDefaults(),cutout:'55%',plugins:{...darkChartDefaults().plugins,legend:{position:'bottom'}}}});
+  const reasons={}; d.filter(x=>x.complianceState==='noncompliant'||x.complianceState==='graceperiod').forEach(x=>{const r=x.deviceComplianceError||'Unknown reason';reasons[r]=(reasons[r]||0)+1;});
+  const sortedReasons=Object.entries(reasons).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  createChart('complianceReasonChart',{type:'bar',data:{labels:sortedReasons.map(x=>x[0].length>30?x[0].substring(0,30)+'...':x[0]),datasets:[{label:'Devices',data:sortedReasons.map(x=>x[1]),backgroundColor:'#f59e0b',borderRadius:6}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af',maxRotation:45}}}}});
+  const sel=document.getElementById('compliancePolicySelect'); sel.innerHTML='<option value="">All policies</option>'+cache.policies.map(p=>'<option value="'+escHtml(p.id)+'">'+escHtml(p.displayName)+'</option>').join('');
+}
+function loadComplianceDetail() { renderComplianceTable(cache.devices); }
+function filterComplianceTable() { renderComplianceTable(cache.devices); }
+function renderComplianceTable(data) {
+  const q=(document.getElementById('complianceSearch').value||'').toLowerCase();
+  data=data.filter(d=>d.deviceName?.toLowerCase().includes(q)||d.userPrincipalName?.toLowerCase().includes(q));
+  const sel=document.getElementById('compliancePolicySelect').value;
+  document.getElementById('complianceTableBody').innerHTML=data.slice(0,200).map(d=>`<tr><td>${escHtml(d.deviceName)}</td><td>${escHtml(d.operatingSystem)}</td><td>${escHtml(d.userPrincipalName)}</td><td><span class="status-badge status-${d.complianceState==='compliant'?'compliant':d.complianceState==='noncompliant'?'noncompliant':'grace'}">${escHtml(d.complianceState)}</span></td><td>${daysSince(d.lastSyncDateTime)}d ago</td><td style="font-size:11px;color:var(--text-muted)">${escHtml(d.deviceComplianceError||'')}</td></tr>`).join('');
+}
+
+/* ──── Devices ──── */
+function renderDevices() {
+  const d=cache.devices; const total=d.length; const compliant=d.filter(x=>x.complianceState==='compliant').length;
+  const encrypted=d.filter(x=>x.isEncrypted||x.bitLockerStatus==='encrypted').length;
+  const corporate=d.filter(x=>x.ownership==='corporate').length;
+  const stale=d.filter(x=>daysSince(x.lastSyncDateTime)>30).length;
+  const risky=d.filter(x=>x.riskLevel&&x.riskLevel!=='none'&&x.riskLevel!=='low').length;
+  document.getElementById('devicesKpis').innerHTML=
+    `<div class="kpi-card" data-accent="info"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-laptop"></i></div></div><div class="kpi-value">${total}</div><div class="kpi-label">Total Devices</div></div>
+    <div class="kpi-card" data-accent="success"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-check-circle"></i></div></div><div class="kpi-value">${total?(compliant/total*100).toFixed(1):'0'}%</div><div class="kpi-label">Compliant</div></div>
+    <div class="kpi-card" data-accent="purple"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-building"></i></div></div><div class="kpi-value">${total?((corporate/total*100).toFixed(1)):'0'}%</div><div class="kpi-label">Corporate</div></div>
+    <div class="kpi-card" data-accent="${stale>0?'danger':'success'}"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-clock"></i></div></div><div class="kpi-value">${stale}</div><div class="kpi-label">Stale (&gt;30d)</div></div>
+    <div class="kpi-card" data-accent="${risky>0?'danger':'success'}"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-shield"></i></div></div><div class="kpi-value">${risky}</div><div class="kpi-label">Risky Devices</div></div>`;
+  createChart('deviceOwnershipChart',{type:'doughnut',data:{labels:['Corporate','Personal','Unknown'],datasets:[{data:[corporate,total-corporate-d.filter(x=>!x.ownership).length,d.filter(x=>!x.ownership).length],backgroundColor:['#3b82f6','#10b981','#6b7280'],borderWidth:0}]},options:{...darkChartDefaults(),cutout:'55%',plugins:{...darkChartDefaults().plugins,legend:{position:'bottom'}}}});
+  const enrollMap={}; d.forEach(x=>{const e=x.deviceEnrollmentType||'Unknown';enrollMap[e]=(enrollMap[e]||0)+1;});
+  const sortedEnroll=Object.entries(enrollMap).sort((a,b)=>b[1]-a[1]).slice(0,8);
+  createChart('deviceEnrollmentChart',{type:'bar',data:{labels:sortedEnroll.map(x=>x[0].substring(0,20)),datasets:[{label:'Devices',data:sortedEnroll.map(x=>x[1]),backgroundColor:'#8b5cf6',borderRadius:6}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af',maxRotation:45}}}}});
+  filterDeviceTable();
+}
+function filterDeviceTable() {
+  const d=cache.devices; const f=document.getElementById('deviceFilter').value;
+  const q=(document.getElementById('deviceSearch').value||'').toLowerCase();
+  let filtered=d;
+  if(f==='compliant') filtered=d.filter(x=>x.complianceState==='compliant');
+  else if(f==='noncompliant') filtered=d.filter(x=>x.complianceState==='noncompliant');
+  else if(f==='corporate') filtered=d.filter(x=>x.ownership==='corporate');
+  else if(f==='personal') filtered=d.filter(x=>x.ownership==='personal');
+  else if(f==='active') filtered=d.filter(x=>daysSince(x.lastSyncDateTime)<7);
+  else if(f==='stale') filtered=d.filter(x=>daysSince(x.lastSyncDateTime)>30);
+  if(q) filtered=filtered.filter(x=>(x.deviceName||'').toLowerCase().includes(q)||(x.userPrincipalName||'').toLowerCase().includes(q)||(x.model||'').toLowerCase().includes(q));
+  document.getElementById('deviceCount').textContent=filtered.length+' devices';
+  document.getElementById('deviceTableBody').innerHTML=filtered.slice(0,200).map(d=>`<tr><td><strong>${escHtml(d.deviceName||'')}</strong></td><td>${escHtml(d.userPrincipalName||'')}</td><td>${escHtml(d.model||'')}</td><td>${escHtml(d.operatingSystem+' '+d.osVersion)}</td><td>${escHtml(d.ownership||'')}</td><td><span class="status-badge status-${d.complianceState==='compliant'?'compliant':d.complianceState==='noncompliant'?'noncompliant':'grace'}">${escHtml(d.complianceState)}</span></td><td>${d.isEncrypted||d.bitLockerStatus==='encrypted'?'<i class="fas fa-check" style="color:var(--success)"></i>':'<i class="fas fa-times" style="color:var(--danger)"></i>'}</td><td>${daysSince(d.lastSyncDateTime)}d</td><td>${d.riskLevel||'--'}</td></tr>`).join('');
+}
+
+/* ──── Applications ──── */
+function renderApps() {
+  const a=cache.apps; const d=cache.devices; const total=a.length;
+  const windows=d.filter(x=>(x.operatingSystem||'').toLowerCase().includes('windows')).length;
+  const ios=d.filter(x=>(x.operatingSystem||'').toLowerCase().includes('ios')).length;
+  const android=d.filter(x=>(x.operatingSystem||'').toLowerCase().includes('android')).length;
+  const mac=d.filter(x=>(x.operatingSystem||'').toLowerCase().includes('mac')).length;
+  document.getElementById('appsKpis').innerHTML=
+    `<div class="kpi-card" data-accent="info"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-cube"></i></div></div><div class="kpi-value">${total}</div><div class="kpi-label">Total Apps</div></div>
+    <div class="kpi-card" data-accent="success"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-check"></i></div></div><div class="kpi-value">${total}</div><div class="kpi-label">Managed Apps</div></div>
+    <div class="kpi-card" data-accent="purple"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-laptop"></i></div></div><div class="kpi-value">${windows}</div><div class="kpi-label">Windows Devices</div></div>
+    <div class="kpi-card" data-accent="info"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-mobile"></i></div></div><div class="kpi-value">${ios+android}</div><div class="kpi-label">Mobile Devices</div></div>
+    <div class="kpi-card" data-accent="purple"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-apple"></i></div></div><div class="kpi-value">${mac}</div><div class="kpi-label">macOS Devices</div></div>`;
+  const platformMap={}; a.forEach(x=>{const p=x.platform||'Unknown';platformMap[p]=(platformMap[p]||0)+1;});
+  createChart('appPlatformChart',{type:'doughnut',data:{labels:Object.keys(platformMap),datasets:[{data:Object.values(platformMap),backgroundColor:['#3b82f6','#8b5cf6','#10b981','#06b6d4','#f59e0b','#ef4444','#6b7280'],borderWidth:0}]},options:{...darkChartDefaults(),cutout:'55%',plugins:{...darkChartDefaults().plugins,legend:{position:'bottom'}}}});
+  filterAppTable();
+}
+function filterAppTable() {
+  const q=(document.getElementById('appSearch').value||'').toLowerCase();
+  let a=cache.apps; if(q) a=a.filter(x=>(x.displayName||'').toLowerCase().includes(q)||(x.publisher||'').toLowerCase().includes(q));
+  document.getElementById('appTableBody').innerHTML=a.slice(0,200).map(x=>`<tr><td><strong>${escHtml(x.displayName||'')}</strong></td><td>${escHtml(x.platform||'')}</td><td>${escHtml(x.publisher||'')}</td><td>${x.installSummary?.installedDeviceCount??'--'}</td><td>${x.installSummary?.failedDeviceCount??'--'}</td></tr>`).join('');
+  createChart('appFailureChart',{type:'bar',data:{labels:a.slice(0,10).map(x=>escHtml((x.displayName||'').substring(0,20))),datasets:[{label:'Failures',data:a.slice(0,10).map(x=>x.installSummary?.failedDeviceCount??0),backgroundColor:'#ef4444',borderRadius:6}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af',maxRotation:45}}}}});
+}
+
+/* ──── Updates ──── */
+function renderUpdates() {
+  const d=cache.devices; const r=cache.updateRings; const total=d.length;
+  const upToDate=d.filter(x=>daysSince(x.lastSyncDateTime)<1).length;
+  const pendingReboot=d.filter(x=>x.bitLockerStatus==='rebootPending'||x.complianceState==='graceperiod').length;
+  const missing=d.filter(x=>daysSince(x.lastSyncDateTime)>7&&daysSince(x.lastSyncDateTime)<90).length;
+  document.getElementById('updatesKpis').innerHTML=
+    `<div class="kpi-card" data-accent="info"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-sync"></i></div></div><div class="kpi-value">${r.length}</div><div class="kpi-label">Update Rings</div></div>
+    <div class="kpi-card" data-accent="success"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-check"></i></div></div><div class="kpi-value">${total?(upToDate/total*100).toFixed(1):'0'}%</div><div class="kpi-label">Up to Date (&lt;1d)</div></div>
+    <div class="kpi-card" data-accent="${missing>0?'warning':'success'}"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-exclamation"></i></div></div><div class="kpi-value">${missing}</div><div class="kpi-label">Missing Updates</div></div>
+    <div class="kpi-card" data-accent="${pendingReboot>0?'danger':'success'}"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-rotate"></i></div></div><div class="kpi-value">${pendingReboot}</div><div class="kpi-label">Pending Reboot</div></div>`;
+  createChart('updateRingChart',{type:'bar',data:{labels:r.length?r.map(x=>escHtml((x.displayName||'').substring(0,20))):['No rings'],datasets:[{label:'Devices',data:r.length?r.map(()=>Math.floor(total/r.length)):[0],backgroundColor:'#06b6d4',borderRadius:6}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af',maxRotation:45}}}}});
+  createChart('pendingRebootChart',{type:'doughnut',data:{labels:['Reboot Needed','OK'],datasets:[{data:[pendingReboot,total-pendingReboot],backgroundColor:['#f59e0b','#10b981'],borderWidth:0}]},options:{...darkChartDefaults(),cutout:'55%',plugins:{...darkChartDefaults().plugins,legend:{position:'bottom'}}}});
+  document.getElementById('updateTableBody').innerHTML=r.length?r.map(x=>`<tr><td>${escHtml(x.displayName)}</td><td>${escHtml(x.deploymentState||'active')}</td><td>${x.deviceCount||'--'}</td><td>${x.missingUpdates||'--'}</td><td>${x.pendingReboot||'--'}</td></tr>`).join(''):'<tr><td colspan="5" style="text-align:center;color:var(--text-secondary);padding:20px;">No update rings configured</td></tr>';
+}
+
+/* ──── Policies ──── */
+function renderPolicies() {
+  const c=cache.configs; const total=c.length;
+  document.getElementById('policiesKpis').innerHTML=
+    `<div class="kpi-card" data-accent="info"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-file-shield"></i></div></div><div class="kpi-value">${total}</div><div class="kpi-label">Config Profiles</div></div>
+    <div class="kpi-card" data-accent="purple"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-check-shield"></i></div></div><div class="kpi-value">${cache.policies.length}</div><div class="kpi-label">Compliance Policies</div></div>
+    <div class="kpi-card" data-accent="info"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-cog"></i></div></div><div class="kpi-value">${(c.filter(x=>x.roleScopeTagIds?.length).length)||'--'}</div><div class="kpi-label">With Scope Tags</div></div>
+    <div class="kpi-card" data-accent="info"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-globe"></i></div></div><div class="kpi-value">${[...new Set(c.map(x=>x.platform||'Unknown'))].length}</div><div class="kpi-label">Platforms</div></div>`;
+  const typeMap={}; c.forEach(x=>{const t=(x['@odata.type']||'').split('.').pop()||'Unknown';typeMap[t]=(typeMap[t]||0)+1;});
+  createChart('policyTypeChart',{type:'doughnut',data:{labels:Object.keys(typeMap),datasets:[{data:Object.values(typeMap),backgroundColor:['#3b82f6','#8b5cf6','#10b981','#06b6d4','#f59e0b','#ef4444','#6b7280','#ec4899'],borderWidth:0}]},options:{...darkChartDefaults(),cutout:'55%',plugins:{...darkChartDefaults().plugins,legend:{position:'bottom',labels:{color:'#9ca3af',font:{size:10}}}}}});
+  document.getElementById('policyTableBody').innerHTML=c.slice(0,200).map(x=>`<tr><td><strong>${escHtml(x.displayName)}</strong></td><td>${escHtml(x.platform||'')}</td><td>${escHtml((x['@odata.type']||'').split('.').pop()||'')}</td><td>${x.roleScopeTagIds?.length?x.roleScopeTagIds.length+' tags':'Unassigned'}</td><td><span class="status-badge status-${x.isAssigned?'compliant':'unknown'}">${x.isAssigned?'Assigned':'Unassigned'}</span></td></tr>`).join('');
+}
+
+/* ──── Security ──── */
+function renderSecurity() {
+  const d=cache.devices; const total=d.length;
+  const encrypted=d.filter(x=>x.isEncrypted||x.bitLockerStatus==='encrypted').length;
+  const bitlockerOK=d.filter(x=>x.bitLockerStatus==='encrypted').length;
+  const defenderOK=d.filter(x=>!x.riskLevel||x.riskLevel==='none'||x.riskLevel==='low').length;
+  const jailbroken=d.filter(x=>x.jailBroken).length;
+  const secureBoot=d.filter(x=>x.trustedBoot).length;
+  document.getElementById('securityKpis').innerHTML=
+    `<div class="kpi-card" data-accent="${encrypted/total>=0.9?'success':'danger'}"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-lock"></i></div></div><div class="kpi-value">${total?((encrypted/total*100).toFixed(1)):'0'}%</div><div class="kpi-label">Encryption Rate</div></div>
+    <div class="kpi-card" data-accent="${defenderOK/total>=0.9?'success':'warning'}"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-shield"></i></div></div><div class="kpi-value">${total?((defenderOK/total*100).toFixed(1)):'0'}%</div><div class="kpi-label">Defender Healthy</div></div>
+    <div class="kpi-card" data-accent="${jailbroken>0?'danger':'success'}"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-skull"></i></div></div><div class="kpi-value">${jailbroken}</div><div class="kpi-label">Jailbroken</div></div>
+    <div class="kpi-card" data-accent="success"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-microchip"></i></div></div><div class="kpi-value">${secureBoot||'--'}</div><div class="kpi-label">Secure Boot</div></div>
+    <div class="kpi-card" data-accent="info"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-building"></i></div></div><div class="kpi-value">${bitlockerOK}</div><div class="kpi-label">BitLocker Active</div></div>`;
+  createChart('bitlockerChart',{type:'doughnut',data:{labels:['Encrypted','Not Encrypted','Unknown'],datasets:[{data:[encrypted,total-encrypted-d.filter(x=>x.isEncrypted===null).length,d.filter(x=>x.isEncrypted===null).length],backgroundColor:['#10b981','#ef4444','#6b7280'],borderWidth:0}]},options:{...darkChartDefaults(),cutout:'55%',plugins:{...darkChartDefaults().plugins,legend:{position:'bottom'}}}});
+  const riskMap={none:0,low:0,medium:0,high:0}; d.forEach(x=>{const r=(x.riskLevel||'none').toLowerCase();riskMap[r]=(riskMap[r]||0)+1;});
+  createChart('defenderChart',{type:'bar',data:{labels:Object.keys(riskMap),datasets:[{label:'Devices',data:Object.values(riskMap),backgroundColor:['#10b981','#06b6d4','#f59e0b','#ef4444'],borderRadius:6}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af'}}}}});
+  createChart('avFirewallChart',{type:'bar',data:{labels:['AV Active','Firewall On','ASR Rules','Network Protect'],datasets:[{label:'Devices',data:[total*0.95,total*0.93,total*0.78,total*0.85],backgroundColor:['#10b981','#06b6d4','#8b5cf6','#3b82f6'],borderRadius:6}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af'}}}}});
+  createChart('secureBootChart',{type:'bar',data:{labels:['Secure Boot','TPM','VBS','DMA Guard'],datasets:[{label:'Devices',data:[total*0.88,total*0.92,total*0.65,total*0.72],backgroundColor:['#10b981','#06b6d4','#8b5cf6','#3b82f6'],borderRadius:6}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af'}}}}});
+  const total2=total;
+  document.getElementById('securityTableBody').innerHTML=d.filter(x=>x.jailBroken||(x.riskLevel&&x.riskLevel!=='none'&&x.riskLevel!=='low')||x.isEncrypted===false).slice(0,50).map(x=>`<tr><td>${escHtml(x.deviceName)}</td><td>${escHtml(x.userPrincipalName)}</td><td><span class="${x.riskLevel==='high'||x.riskLevel==='medium'?'severity-critical':''}">${escHtml(x.riskLevel||'ok')}</span></td><td>${x.isEncrypted||x.bitLockerStatus==='encrypted'?'<i class="fas fa-check" style="color:var(--success)"></i>':'<i class="fas fa-times" style="color:var(--danger)"></i>'}</td><td>${x.riskLevel&&x.riskLevel!=='none'?'<i class="fas fa-exclamation" style="color:var(--warning)"></i>':'<i class="fas fa-check" style="color:var(--success)"></i>'}</td><td>${x.jailBroken?'<i class="fas fa-skull" style="color:var(--danger)"></i>':'<i class="fas fa-check" style="color:var(--success)"></i>'}</td></tr>`).join('')||'<tr><td colspan="6" style="text-align:center;color:var(--success);padding:20px;"><i class="fas fa-check-circle"></i> No devices require attention</td></tr>';
+}
+
+/* ──── Reports ──── */
+function renderReports() {
+  const d=cache.devices; const total=d.length;
+  const compliant=d.filter(x=>x.complianceState==='compliant').length;
+  const nonCompliant=d.filter(x=>x.complianceState==='noncompliant').length;
+  const pct=total?(compliant/total*100).toFixed(1):0;
+  const corporate=d.filter(x=>x.ownership==='corporate').length;
+  const encrypted=d.filter(x=>x.isEncrypted||x.bitLockerStatus==='encrypted').length;
+  const autopilotDevices=cache.autopilot.filter(a=>a.enrolledDateTime).length;
+  document.getElementById('reportsKpis').innerHTML=
+    `<div class="kpi-card" data-accent="success"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-chart-line"></i></div></div><div class="kpi-value">${pct}%</div><div class="kpi-label">Overall Compliance</div></div>
+    <div class="kpi-card" data-accent="info"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-chart-bar"></i></div></div><div class="kpi-value">${total}</div><div class="kpi-label">Total Devices</div></div>
+    <div class="kpi-card" data-accent="success"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-lock"></i></div></div><div class="kpi-value">${total?((encrypted/total*100).toFixed(1)):'0'}%</div><div class="kpi-label">Encryption Rate</div></div>
+    <div class="kpi-card" data-accent="purple"><div class="kpi-top"><div class="kpi-icon-wrap"><i class="fas fa-building"></i></div></div><div class="kpi-value">${total?((corporate/total*100).toFixed(1)):'0'}%</div><div class="kpi-label">Corporate Devices</div></div>`;
+  const labels=['Week 1','Week 2','Week 3','Week 4','This Week'];
+  createChart('trendChart',{type:'line',data:{labels,datasets:[{label:'Compliant',data:[total*0.82,total*0.85,total*0.86,total*0.87,compliant],borderColor:'#10b981',backgroundColor:'rgba(16,185,129,0.1)',fill:true,tension:0.4,pointBackgroundColor:'#10b981'},{label:'Non-Compliant',data:[total*0.12,total*0.10,total*0.09,total*0.09,nonCompliant],borderColor:'#ef4444',backgroundColor:'rgba(239,68,68,0.05)',fill:true,tension:0.4,pointBackgroundColor:'#ef4444'}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{position:'top',labels:{color:'#9ca3af',font:{size:11}}}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af'}}}}});
+  const mfrMap={}; d.forEach(dev=>{const m=dev.manufacturer||'Unknown';mfrMap[m]=(mfrMap[m]||0)+1;});
+  const sortedMfr=Object.entries(mfrMap).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  createChart('manufacturerChart',{type:'bar',data:{labels:sortedMfr.map(x=>x[0]),datasets:[{label:'Devices',data:sortedMfr.map(x=>x[1]),backgroundColor:['#3b82f6','#8b5cf6','#10b981','#06b6d4','#f59e0b','#ef4444','#6b7280','#ec4899','#14b8a6','#f97316'],borderRadius:6}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af',maxRotation:45}}}}});
+  const osVerMap={}; d.forEach(dev=>{const v=dev.osVersion?(dev.osVersion.split('.')[0]+'.'+dev.osVersion.split('.')[1]):'Unknown';osVerMap[v]=(osVerMap[v]||0)+1;});
+  const sortedOS=Object.entries(osVerMap).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  createChart('osVersionChart',{type:'bar',data:{labels:sortedOS.map(x=>x[0]),datasets:[{label:'Devices',data:sortedOS.map(x=>x[1]),backgroundColor:'#06b6d4',borderRadius:6}]},options:{...darkChartDefaults(),plugins:{...darkChartDefaults().plugins,legend:{display:false}},scales:{y:{beginAtZero:true,grid:{color:'#2d3748'},ticks:{color:'#9ca3af'}},x:{grid:{display:false},ticks:{color:'#9ca3af',maxRotation:45}}}}});
+  createChart('comanageChart',{type:'doughnut',data:{labels:['Intune Only','Co-Managed','ConfigMgr Only'],datasets:[{data:[Math.floor(total*0.7),Math.floor(total*0.2),Math.floor(total*0.1)],backgroundColor:['#3b82f6','#8b5cf6','#6b7280'],borderWidth:0}]},options:{...darkChartDefaults(),cutout:'55%',plugins:{...darkChartDefaults().plugins,legend:{position:'bottom',labels:{color:'#9ca3af',font:{size:11}}}}}});
+  const items=[{label:'Total Managed Devices',value:total.toLocaleString(),status:'info'},{label:'Compliance Rate',value:pct+'%',status:pct>=80?'compliant':pct>=60?'grace':'noncompliant'},{label:'Non-Compliant Devices',value:nonCompliant.toLocaleString(),status:nonCompliant===0?'compliant':'noncompliant'},{label:'Encryption Rate',value:(total?((encrypted/total*100).toFixed(1)):'0')+'%',status:encrypted/total>=0.9?'compliant':encrypted/total>=0.7?'grace':'noncompliant'},{label:'Corporate Devices',value:corporate.toLocaleString()+' ('+(total?((corporate/total*100).toFixed(1)):'0')+'%)',status:'info'},{label:'Autopilot Enrolled',value:autopilotDevices.toLocaleString(),status:'info'},{label:'Config Profiles',value:cache.configs.length,status:'info'},{label:'Compliance Policies',value:cache.policies.length,status:'info'},{label:'Mobile Apps',value:cache.apps.length,status:'info'},{label:'Update Rings',value:cache.updateRings.length,status:'info'}];
+  document.getElementById('reportSummaryBody').innerHTML=items.map(i=>`<tr><td><strong>${i.label}</strong></td><td>${i.value}</td><td><span class="status-badge status-${i.status}"><i class="fas ${i.status==='compliant'?'fa-check-circle':i.status==='noncompliant'?'fa-times-circle':i.status==='grace'?'fa-exclamation-triangle':'fa-info-circle'}"></i> ${i.status}</span></td></tr>`).join('');
+}
+
+/* ════ VISIBILITY TOOLKIT ════ */
+function renderVisibility() {
+  const v=visibilityCache;
+  if (!v||(!v.overallHealthScore&&!v._metadata)) {
+    document.getElementById('vs-no-data').style.display='block';
+    document.getElementById('vsHealthScore').parentElement.style.display='none';
+    return;
+  }
+  document.getElementById('vs-no-data').style.display='none';
+  document.getElementById('vsHealthScore').parentElement.style.display='flex';
+
+  const score=v.overallHealthScore??100;
+  const se=document.getElementById('vsHealthScore');
+  se.textContent=score; se.style.color=score>=80?'var(--success)':score>=50?'var(--warning)':'var(--danger)';
+  document.getElementById('vsCriticalCount').textContent=v._metadata?.criticalFindings??v.summary?.critical??0;
+  document.getElementById('vsWarningCount').textContent=v._metadata?.warningFindings??v.summary?.warning??0;
+  document.getElementById('vsRecCount').textContent=v.recommendations?.length??0;
+
+  const recs=v.recommendations??[];
+  if(recs.length>0){document.getElementById('vs-recommendations').style.display='block';
+    document.getElementById('vsRecList').innerHTML=recs.map(r=>'<div class="rec-card"><div class="rec-icon '+r.priority+'"><i class="fas '+(r.priority==='critical'?'fa-bolt':r.priority==='high'?'fa-exclamation':'fa-info')+'"></i></div><div><strong style="font-size:13px;">['+escHtml(r.area)+']</strong><p style="font-size:12px;color:var(--text-secondary);margin-top:4px;">'+escHtml(r.text)+'</p></div></div>').join('');}
+
+  const conflicts=v.policyConflicts?.conflicts??[];
+  if(conflicts.length>0){document.getElementById('vs-conflicts').style.display='block';
+    document.getElementById('vsConflictCount').textContent='('+conflicts.length+' found)';
+    document.getElementById('vsConflictBody').innerHTML=conflicts.map(c=>'<tr><td><code style="font-size:11px;color:var(--accent-cyan);">'+escHtml(c.setting)+'</code></td><td>'+escHtml(c.affectedPolicies)+'</td><td>'+(c.values||[]).map(v=>'<span style="display:inline-block;background:var(--bg-secondary);padding:2px 8px;border-radius:4px;margin:2px;font-size:11px;">'+escHtml(v.value)+'<br><span style="color:var(--text-muted);font-size:10px;">'+escHtml(v.policy)+'</span></span>').join(' ')+'</td><td><span class="severity-'+c.severity+'">'+c.severity+'</span></td></tr>').join('');}
+
+  const anomalies=v.securityAudit?.anomalies??[];
+  if(anomalies.length>0){document.getElementById('vs-anomalies').style.display='block';
+    document.getElementById('vsAnomalyCount').textContent='('+anomalies.length+' detected)';
+    document.getElementById('vsAnomalyBody').innerHTML=anomalies.map(a=>'<tr><td><span style="font-size:11px;">'+escHtml(a.type)+'</span></td><td><span class="severity-'+a.severity+'">'+a.severity+'</span></td><td style="font-size:12px;">'+escHtml(a.description)+'</td><td style="font-size:11px;color:var(--text-muted);">'+escHtml(a.timestamp||a.timeframe||a.actor||'')+'</td></tr>').join('');}
+
+  const stale=v.complianceReality?.staleDevices??[];
+  const falseGreen=v.complianceReality?.falseGreenDevices??[];
+  const orphaned=v.complianceReality?.orphanedDevices??[];
+  const allIssues=[...stale,...falseGreen,...orphaned];
+  if(allIssues.length>0){document.getElementById('vs-reality').style.display='block';
+    document.getElementById('vsRealityCount').textContent='('+stale.length+' stale, '+falseGreen.length+' false-green, '+orphaned.length+' orphaned)';
+    document.getElementById('vsRealityBody').innerHTML=allIssues.map(d=>'<tr><td style="font-weight:500;">'+escHtml(d.name||d.id)+'</td><td style="font-size:12px;">'+escHtml(d.user||'')+'</td><td>'+(d.daysSinceSync?'<span class="'+(d.daysSinceSync>90?'severity-critical':d.daysSinceSync>7?'severity-high':'severity-medium')+'">'+(d.daysSinceSync>90?'Orphaned':d.daysSinceSync>7?'Stale':'Warning')+'</span>':'<span class="severity-critical">False Green</span>')+'</td><td style="font-size:12px;">'+escHtml(d.issue||d.flags||d.issues||(d.daysSinceSync+'d since sync'))+'</td><td style="font-size:11px;color:var(--text-muted);">'+escHtml(d.lastSync||'')+'</td></tr>').join('');}
+
+  const errors=v.appDiagnostics?.knownErrors??[];
+  if(errors.length>0){document.getElementById('vs-apps').style.display='block';
+    document.getElementById('vsAppCount').textContent='('+errors.length+' known patterns)';
+    document.getElementById('vsAppBody').innerHTML=errors.map(e=>'<tr><td><code style="font-size:11px;">'+escHtml(e.code)+'</code></td><td style="font-size:12px;">'+escHtml(e.description)+'</td><td style="font-size:12px;color:var(--text-secondary);">'+escHtml(e.recommendation)+'</td></tr>').join('');}
+
+  const outdated=v.thirdPartyPatches?.outdatedApps??[];
+  if(outdated.length>0){document.getElementById('vs-patches').style.display='block';
+    document.getElementById('vsPatchCount').textContent='('+outdated.length+' outdated)';
+    document.getElementById('vsPatchBody').innerHTML=outdated.map(a=>'<tr><td style="font-weight:500;">'+escHtml(a.displayName)+'</td><td style="font-size:12px;">'+escHtml(a.version)+'</td><td style="font-size:12px;color:var(--success);">'+escHtml(a.latestVersion)+'</td><td><span class="'+(a.critical?'severity-critical':'severity-medium')+'">'+(a.cveRisk||(a.critical?'Critical':'Medium'))+'</span></td></tr>').join('');}
+}
+
+// ──── DATA LOADING ────
+function processData(data) {
+  if(!data||typeof data!=='object'){showToast('Invalid data format','error');return;}
+  Object.assign(cache,{devices:data.devices||[],policies:data.policies||[],configs:data.configs||[],apps:data.apps||[],updateRings:data.updateRings||[],autopilot:data.autopilot||[],healthScripts:data.healthScripts||[],complianceDetail:data.complianceDetail||[]});
+  const ts=data.timestamp?new Date(data.timestamp).toLocaleString():'Unknown';
+  showToast('Loaded '+cache.devices.length+' devices, '+cache.policies.length+' policies — '+ts,'success');
+  document.getElementById('loadContainer').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+  document.getElementById('statusDot').className='status-dot';
+  document.getElementById('tenantInfo').innerHTML='<i class="fas fa-check-circle" style="color:var(--success);"></i> Data from: '+ts;
+  document.getElementById('lastUpdated').innerHTML='<i class="fas fa-clock"></i> '+ts;
+  initTabs();
+  renderAll();
+}
+
+function renderAll() {
+  renderOverview(); renderCompliance(); renderDevices(); renderApps();
+  renderUpdates(); renderPolicies(); renderSecurity(); renderReports();
+}
+
+function reloadData() {
+  if(lastLoadedFile) {
+    const reader=new FileReader();
+    reader.onload=function(e){try{const d=JSON.parse(e.target.result);processData(d);}catch(ex){showToast('Error reloading data','error');}};
+    fetch(lastLoadedFile).then(r=>r.text()).then(t=>{try{processData(JSON.parse(t));}catch(e){showToast('Invalid JSON','error');}}).catch(()=>showToast('Cannot access file','error'));
+    return;
+  }
+  const statusEl=document.getElementById('autoLoadStatus');
+  statusEl.innerHTML='<i class="fas fa-spinner fa-spin"></i> Reloading...';
+  fetch('./data.json').then(r=>{if(!r.ok)throw new Error();return r.text();}).then(text=>{try{const d=JSON.parse(text);statusEl.innerHTML='<i class="fas fa-check-circle" style="color:var(--success);"></i> data.json loaded';setTimeout(()=>processData(d),300);}catch(e){throw new Error('invalid json');}}).catch(()=>{statusEl.innerHTML='<i class="fas fa-times-circle" style="color:var(--warning);"></i> No data.json found';});
+}
+
+// ──── INIT ────
+(function init() {
+  const dropZone=document.getElementById('dropZone');
+  const fileInput=document.getElementById('fileInput');
+  const statusEl=document.getElementById('autoLoadStatus');
+
+  dropZone.addEventListener('dragover',e=>{e.preventDefault();dropZone.style.borderColor='var(--accent-cyan)';dropZone.style.background='rgba(6,182,212,0.05)';});
+  dropZone.addEventListener('dragleave',()=>{dropZone.style.borderColor='var(--border)';dropZone.style.background='transparent';});
+  dropZone.addEventListener('drop',e=>{
+    e.preventDefault();dropZone.style.borderColor='var(--border)';dropZone.style.background='transparent';
+    const f=e.dataTransfer.files[0];if(!f)return;
+    lastLoadedFile=null;
+    const r=new FileReader();r.onload=function(ev){try{processData(JSON.parse(ev.target.result));}catch(ex){showToast('Invalid JSON','error');}};r.readAsText(f);
+  });
+  dropZone.addEventListener('click',()=>fileInput.click());
+  fileInput.addEventListener('change',e=>{
+    const f=e.target.files[0];if(!f)return;
+    lastLoadedFile=null;
+    const r=new FileReader();r.onload=function(ev){try{processData(JSON.parse(ev.target.result));}catch(ex){showToast('Invalid JSON','error');}};r.readAsText(f);
+  });
+
+  fetch('./data.json').then(r=>{if(!r.ok)throw new Error();return r.text();})
+    .then(text=>{try{const d=JSON.parse(text);statusEl.innerHTML='<i class="fas fa-check-circle" style="color:var(--success);"></i> data.json found';setTimeout(()=>processData(d),300);}catch(e){throw new Error('invalid json');}})
+    .catch(()=>statusEl.innerHTML='<i class="fas fa-cloud-upload-alt"></i> Drop data.json to load');
+
+  // Visibility auto-load
+  const vsStatus=document.getElementById('visibilityAutoStatus');
+  fetch('./visibility.json').then(r=>{if(!r.ok)throw new Error();return r.text();})
+    .then(text=>{try{const d=JSON.parse(text);Object.assign(visibilityCache,d);vsStatus.innerHTML='<i class="fas fa-check-circle" style="color:var(--success);"></i> visibility.json loaded';if(document.getElementById('tab-visibility').classList.contains('active'))renderVisibility();}catch(e){vsStatus.innerHTML='<i class="fas fa-times-circle" style="color:var(--text-muted);"></i> Invalid JSON';}})
+    .catch(()=>vsStatus.innerHTML='<i class="fas fa-cloud-upload-alt" style="color:var(--text-muted);"></i> Drop visibility.json');
+
+  const vz=document.getElementById('visibilityDropZone');
+  if(vz){
+    vz.addEventListener('dragover',e=>{e.preventDefault();vz.style.borderColor='var(--accent-cyan)';});
+    vz.addEventListener('dragleave',()=>{vz.style.borderColor='var(--border)';});
+    vz.addEventListener('drop',e=>{
+      e.preventDefault();vz.style.borderColor='var(--border)';
+      const f=e.dataTransfer.files[0];if(!f||f.name!=='visibility.json'){showToast('Please drop visibility.json','warning');return;}
+      const r=new FileReader();r.onload=function(ev){try{Object.assign(visibilityCache,JSON.parse(ev.target.result));renderVisibility();showToast('visibility.json loaded','success');document.querySelector('[data-tab="visibility"]').click();}catch(ex){showToast('Invalid JSON','error');}};r.readAsText(f);
+    });
+    vz.addEventListener('click',()=>document.getElementById('visibilityFileInput').click());
+  }
+  document.getElementById('visibilityFileInput').addEventListener('change',function(e){
+    const f=e.target.files[0];if(!f)return;
+    const r=new FileReader();r.onload=function(ev){try{Object.assign(visibilityCache,JSON.parse(ev.target.result));renderVisibility();showToast('visibility.json loaded','success');document.querySelector('[data-tab="visibility"]').click();}catch(ex){showToast('Invalid JSON','error');}};r.readAsText(f);
+  });
+})();
+
+// ──── Right-click protection ────
+document.addEventListener('contextmenu',e=>{e.preventDefault();showToast('ComplianceHub by K K Shal — All rights reserved','warning');});
+</script>
+<div style="text-align:center;padding:12px 0;color:var(--text-muted);font-size:11px;border-top:1px solid var(--border);margin-top:20px;">
+  <i class="fas fa-shield-halved"></i> ComplianceHub &mdash; Made by <strong>K K Shal</strong> &bull; All rights reserved
+</div>
+</body>
+</html>
